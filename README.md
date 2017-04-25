@@ -19,7 +19,7 @@ On CSS and HTML:
 ## Use
 1. You are **welcome** and **encouraged** to edit any part of this theme. It's meant to serve as a base for your own custom themes. You do not need to credit or reference me when submitting your creation as a premade.
 2. You **are allowed** to remove any of my comments.
-3. **Absolutely do not** claim **cast**, as a base theme, as your own. I've invested a lot of personal time and effort in these files.
+3. **Absolutely do not** claim *cast*, as a base theme, as your own. I've invested a lot of personal time and effort in these files.
 4. **Absolutely do not** repost this theme without my permission. **Please notify me** if you see it posted outside of *Adoxography*, *ProBoards Support*, or GitHub.
 5. You **are allowed** to pick and choose parts from cast. Feel free to download it to take what you need.
 
