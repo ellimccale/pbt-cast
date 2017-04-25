@@ -21,7 +21,7 @@ On CSS and HTML:
 2. You **are allowed** to remove any of my comments.
 3. **Absolutely do not** claim *cast*, as a base theme, as your own. I've invested a lot of personal time and effort in these files.
 4. **Absolutely do not** repost this theme without my permission. **Please notify me** if you see it posted outside of *Adoxography*, *ProBoards Support*, or GitHub.
-5. You **are allowed** to pick and choose parts from cast. Feel free to download it to take what you need.
+5. You **are allowed** to pick and choose parts from *cast*. Feel free to download it to take what you need.
 
 ## Included
 1. Predefined styles for the [Thread Descriptions](https://www.proboards.com/library/plugins/item/8) plugin
