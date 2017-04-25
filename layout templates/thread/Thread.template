@@ -1,0 +1,29 @@
+<div class="container posts">
+	<div class="title-bar">
+		{if $[reply_button]}
+			<ul class="controls"><li>$[reply_button]</li></ul>
+		{/if}
+		<h1>$[thread.subject]</h1>
+	</div>
+	<div class="control-bar ui-helper-clearfix $[scroll_class]">
+		$[search]
+		<div class="controls">
+			$[action_menu]
+		</div>
+		<div class="float-left">$[thread.icons]</div>
+		$[pagination]
+	</div>
+	<div class="content cap-bottom">
+		$[thread.labels]
+		$[poll]
+		<table class="list" role="presentation">
+			<tbody class="$[list_class]">
+				$[post_list]
+			</tbody>
+		</table>
+		{if !$[quick_reply]}{if $[bottom_reply_button]}
+			<div class="reply_button pad-all-double">$[bottom_reply_button]<br class="clear" /></div>
+		{/if}{/if}
+	</div>
+</div>
+$[quick_reply]
