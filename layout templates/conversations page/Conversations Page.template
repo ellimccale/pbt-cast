@@ -1,0 +1,36 @@
+<div class="container conversations">
+	<div class="title-bar">
+		<ul class="controls">{if $[create_conversation_button]}<li>$[create_conversation_button]</li>{/if}</ul>
+		<h1>Personal Messages: $[folder_pretty] ($[message_count])</h1>
+	</div>
+	<div class="control-bar ui-helper-clearfix $[scroll_class]">
+		$[search]
+		<div class="controls">
+			$[folder_menu]
+			$[selection_menu]
+			$[action_menu]
+		</div>
+		$[pagination]
+	</div>
+	<div class="content cap-bottom">
+		<table class="list">
+			<thead>
+				<tr class="head">
+					<th class="icon">&nbsp;</th>
+					<th class="checkbox">&nbsp;</th>
+					<th class="main">Subject</th>
+					{if $[outbox]}
+						<th class="recipients">Recipients</th>
+					{else}
+						<th class="created-by">Created By</th>
+					{/if}
+					<th class="replies">Replies</th>
+					<th class="latest last">Last Reply</th>
+				</tr>
+			</thead>
+			<tbody class="list-content $[list_class]">
+				$[conversation_list]
+			</tbody>
+		</table>
+	</div>
+</div>
