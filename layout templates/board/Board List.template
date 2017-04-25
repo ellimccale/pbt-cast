@@ -1,0 +1,51 @@
+<table class="list" role="grid">
+	<tbody>
+		{foreach $[board]}
+			{if !$[board.is_redirect]}
+				<tr id="$[board.content_id]" class="$[board.content_class]">
+					<td class="icon">$[board.icon]</td>
+					<td class="main clickable">
+						<span class="link">$[board]</span>{if $[board.num_viewing]}<span class="viewing"> - $[board.num_viewing] Viewing</span>{/if}<br />
+						<div class="description">$[board.description]</div>
+						{if $[board.num_mods]}
+							<div class="moderators">
+								Moderator{if $[board.num_mods] != 1}s{/if}:
+								{foreach $[board.moderator_group]}$[board.moderator_group.comma_before] $[board.moderator_group]{/foreach}{if $[board.moderator]}{if $[board.moderator_group]}, {/if}{/if}
+								{foreach $[board.moderator]}$[board.moderator]$[board.moderator.comma] {/foreach}
+							</div>
+						{/if}
+						{if $[board.sub_board]}
+							<div class="sub-boards">
+								Sub-board{if $[board.sub_board] != 1}s{/if}:
+								{foreach $[board.sub_board]}<a href="$[board.sub_board.href]">$[board.sub_board.name]</a>$[board.sub_board.comma] {/foreach}
+							</div>
+						{/if}
+					</td>
+					<td class="threads">{if $[board.threads] == -1}N/A{else}$[board.threads]<br>thread{if $[board.threads] != 1}s{/if}{/if}</td>
+					<td class="posts">{if $[board.posts] == -1}N/A{else}$[board.posts]<br>post{if $[board.threads] != 1}s{/if}{/if}</td>
+					<td class="latest last">
+						{if $[board.posts] > 0}
+							{if $[board.last_thread]}
+								$[board.last_thread.recent_link] by $[board.last_thread.last_post.created_by]<br />
+								<span class="date">$[board.last_thread.last_post.created_on]</span>
+							{/if}
+						{else}
+							No posts have been made on this board.
+						{/if}
+					</td>
+				</tr>
+			{else}
+				<tr id="$[board.content_id]" class="$[board.content_class]">
+					<td class="icon">$[board.icon]</td>
+					<td class="main clickable redirect last" colspan="4">
+						<span class="link">$[board]</span><br />
+						<div class="description">$[board.description]</div>
+					</td>
+				</tr>
+			{/if}
+		{/foreach}
+		{if !$[board]}
+			<tr class="last"><td class="last center" colspan="5">No boards were found.</td></tr>
+		{/if}
+	</tbody>
+</table>
