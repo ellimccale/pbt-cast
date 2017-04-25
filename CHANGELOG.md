@@ -1,7 +1,7 @@
-## v2.0.5
+### v2.0.5
 - Hooked up the board icons to the correct variables (previously they were all using the same variable)
 
-## v2.0.4
+### v2.0.4
 visual editor ---
 - Added objects for thread icons, conversation icons
 - Added object for container links hover color
@@ -20,7 +20,7 @@ pagination ---
 shoutbox ---
 - Added 10px padding to .shoutbox.container > .content to correct padding issue
 
-## v2.0.3
+### v2.0.3
 visual editor ---
 - Added objects for board icons, checkmark icon
 
@@ -32,7 +32,7 @@ profile ---
 - Added .groups_title class to table headers for Groups tab
 - Styled .groups_title with text-align: center and padding-left: 20px to line it up with group names row below
 
-## v2.0.2
+### v2.0.2
 images ---
 - Added Smangii's ClearUBBC icons
 
