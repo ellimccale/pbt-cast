@@ -57,6 +57,5 @@ Special thanks to [Smangii](http://smangii.proboards.com/user/1) for his [ClearU
 7. Navigate to and select the cast-skin.pbt file
 8. Once the theme has been imported, click the “Finished” button near the bottom right of the modal dialog window
 
-
 **PROTIP:**
 > If importing the .pbt file results in an error, you may need to try again. Sometimes the ProBoards theme importer fails despite multiple attempts. If the issue persists, try clearing your browser’s cookies and logging in again.
