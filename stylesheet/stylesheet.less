@@ -3,7 +3,7 @@
  * Theme URI:  http://v5-skin-skeleton.proboards.com/
  * Author:     Elli
  * Author URI: http://ellimccale.com/
- * Version:    2.0.5
+ * Version:    2.0.6
  */
 
 /* ======================================================
@@ -855,7 +855,7 @@ a#logo:hover { color: @banner_text_color !important; text-decoration: @banner_te
 a.button { padding: 2px 6px; }
 .button .status { padding: 0px 8px 0px 8px; border: @buttons_border; border-width: 0px 1px 0px 0px; float: left; overflow: hidden; word-wrap: break-word; white-space: nowrap; }
 .button .status img { display: block; margin-top: 2px; position: relative; left: 2px; }
-.button .icon { padding: 1px 2px 1px 1px; border: 0; float: left; line-height: normal !important; }
+.button .icon { padding: 1px 2px; border: 0; float: left; line-height: normal !important; }
 input[type="submit"], input[type="button"], button { padding: 2px 6px; min-height: 26px; }
 .button-x { position: absolute; top: 50%; right: 3px; margin-top: -8px; cursor: pointer; display: block; text-indent: -9999px; width: 16px; height: 16px; background: url('//images.proboards.com/v5/icons-default.png') -16px -32px no-repeat; }
 .button-x:hover { background: url('//images.proboards.com/v5/icons-default.png') 0px -32px no-repeat; }
@@ -905,31 +905,22 @@ input[type="submit"], input[type="button"], button { padding: 2px 6px; min-heigh
 
 /* --- icons --- */
 
+@font_awesome_board_icon_color: @buttons_text_color;
+@font_awesome_board_new_icon_color: @buttons_text_color;
+@font_awesome_board_redirect_icon_color: @buttons_text_color;
+@font_awesome_thread_icon_color: @buttons_text_color;
+@font_awesome_thread_announcement_icon_color: @buttons_text_color;
+@font_awesome_thread_sticky_icon_color: @buttons_text_color;
+@font_awesome_lock_icon_color: @buttons_text_color;
+@font_awesome_poll_icon_color: @buttons_text_color;
+@font_awesome_bookmark_icon_color: @buttons_text_color;
+@font_awesome_message_icon_color: @buttons_text_color;
+@font_awesome_message_new_icon_color: @buttons_text_color;
 @font_awesome_like_icon_color: @buttons_text_color;
 @font_awesome_like_icon_liked_color: #e81c4f;
 @font_awesome_settings_icon_color: @buttons_text_color;
 @font_awesome_search_icon_color: @buttons_text_color;
-@font_awesome_lock_icon_color: @buttons_text_color;
-@font_awesome_bookmark_icon_color: @buttons_text_color;
-@font_awesome_poll_icon_color: @buttons_text_color;
-@font_awesome_board_icon_color: @buttons_text_color;
-@font_awesome_board_new_icon_color: @buttons_text_color;
-@font_awesome_board_redirect_icon_color: @buttons_text_color;
 @font_awesome_checkmark_icon_color: #19cf86;
-@font_awesome_thread_icon_color: @buttons_text_color;
-@font_awesome_thread_announcement_icon_color: @buttons_text_color;
-@font_awesome_thread_sticky_icon_color: @buttons_text_color;
-@font_awesome_message_icon_color: @buttons_text_color;
-@font_awesome_message_new_icon_color: @buttons_text_color;
-
-.posts .post .content-head .controls > a.likes-button { color: @font_awesome_like_icon_color; }
-.posts .post .content-head .controls > a.likes-button.liked { color: @font_awesome_like_icon_liked_color; }
-.button.post-options .status { color: @font_awesome_settings_icon_color; }
-.ui-search .search-filters-button .icon { color: @font_awesome_search_icon_color; }
-.lock_icon { padding-right: 10px; font-size: 17px; color: @font_awesome_lock_icon_color; }
-.bookmark_icon { font-size: 16px; color: @font_awesome_bookmark_icon_color; }
-.poll_icon { font-size: 16px; color: @font_awesome_poll_icon_color; }
-.ui-poll .results tr td .select-box i { padding: 2px; color: @font_awesome_checkmark_icon_color; }
 
 table.list td.icon > .fa-folder { font-size: 16px; color: @font_awesome_board_new_icon_color; }
 table.list td.icon > .fa-folder-o { font-size: 16px; color: @font_awesome_board_icon_color; }
@@ -938,9 +929,19 @@ table.list td.icon > .fa-arrow-circle-o-right { font-size: 16px; color: @font_aw
 .threads .item > td.icon > .fa-comments-o { font-size: 18px; color: @font_awesome_thread_icon_color; }
 .threads .item > td.icon > .fa-bullhorn { font-size: 16px; color: @font_awesome_thread_announcement_icon_color; }
 .threads .item > td.icon > .fa-sticky-note-o { font-size: 17px; color: @font_awesome_thread_sticky_icon_color; }
+.lock_icon { padding-right: 10px; font-size: 17px; color: @font_awesome_lock_icon_color; }
+.poll_icon { font-size: 16px; color: @font_awesome_poll_icon_color; }
+.bookmark_icon { font-size: 16px; color: @font_awesome_bookmark_icon_color; }
 
 .conversations .item > .icon > .fa-envelope-o { color: @font_awesome_message_icon_color; }
 .conversations .item.new > .icon > .fa-envelope { color: @font_awesome_message_new_icon_color; }
+
+.posts .post .content-head .controls > a.likes-button { color: @font_awesome_like_icon_color; }
+.posts .post .content-head .controls > a.likes-button.liked { color: @font_awesome_like_icon_liked_color; }
+.button .status { color: @font_awesome_settings_icon_color; }
+.ui-search .search-filters-button .icon { color: @font_awesome_search_icon_color; }
+
+.ui-poll .results tr td .select-box i { padding: 2px; color: @font_awesome_checkmark_icon_color; }
 
 
 /* ======================================================
