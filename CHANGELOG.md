@@ -1,3 +1,6 @@
+### v2.0.6
+- Corrected the issue where clicking pagination links causes the Font Awesome glyphs to disappear
+
 ### v2.0.5
 - Hooked up the board icons to the correct variables (previously they were all using the same variable)
 
