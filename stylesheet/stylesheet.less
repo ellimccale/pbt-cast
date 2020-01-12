@@ -362,8 +362,6 @@
 
 html { font-size: 62.5%; -webkit-text-size-adjust: 100%; .box-sizing(); } /* 1 */
 
-html, body { min-height: 100vh; }
-
 body { background-color: @body_background_color; background-image: @body_background_image; background-attachment: @body_background_attachment; background-repeat: @body_background_repeat; background-position: @body_background_position; font-style: @default_forum_text_font_style; font-weight: @default_forum_text_font_weight; font-size: @default_forum_text_font_size; font-family: @default_forum_text_font_family; line-height: 1.4; text-decoration: @default_forum_text_decoration; text-transform: @default_forum_text_case; color: @default_forum_text_color; .flex-display(); .flex-direction(column); }
 
 
@@ -696,17 +694,7 @@ a#logo:hover { text-decoration: @banner_text_decoration !important; color: @bann
  * Main
  * ====================================================== */
 
-/**
- * 1. Push footer to the bottom of the page, regardless
- *    of page height.
- */
-
-#wrapper {
-    width: @wrapper_width;
-    margin: 0 auto;
-    overflow-x: hidden;
-    .flex-grow(1); /* 1 */
-}
+#wrapper { width: @wrapper_width; margin: 0 auto; overflow-x: hidden; }
 
 
 /* Containers
