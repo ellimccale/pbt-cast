@@ -9,6 +9,7 @@
 		<td class="last-online last">{if $[user.is_online]}Member is Online{else}$[user.last_online]{/if}</td>
 	</tr>
 {/foreach}
+
 {if !$[user]}
 	<tr><td colspan="7" class="last center">No members were found.</td></tr>
 {/if}

@@ -1,6 +1,6 @@
 <div class="container show-user">
 	<div class="title-bar">
-		<h1>View Profile - $[user.name] ($[user.username])</h1>
+		<h2>View Profile - $[user.name] ($[user.username])</h2>
 	</div>
 	<div class="content cap-bottom">
 		<div class="ui-tabMenu">
@@ -10,13 +10,13 @@
 		</div>
 		<div class="pad-all-thick clear">
 			<div class="float-left">
-				<div class="float-left pad-right-double">$[user.avatar_medium]</div>
+				<div class="float-left pad-right-thick">$[user.avatar_medium]</div>
 				<div class="name_and_group float-right">
-					<span class="big_username" style="color: $[user.color];">$[user.name]</span><br />
+					<span class="big_username" style="color: $[user.color];">$[user.name]</span><br>
 					{if $[user.group]}
-						$[user.group.name]<br />$[user.group.stars]
+						$[user.group.name]<br>$[user.group.stars]
 					{else}
-						$[user.rank.name]<br />$[user.rank.stars]
+						$[user.rank.name]<br>$[user.rank.stars]
 					{/if}
 				</div>
 			</div>
@@ -36,7 +36,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="pad-all-double ui-helper-clearfix clear">
+		<div class="pad-all-thick ui-helper-clearfix clear">
 			$[content]
 		</div>
 	</div>

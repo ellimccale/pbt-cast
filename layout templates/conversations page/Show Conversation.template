@@ -1,7 +1,7 @@
 <div class="container messages">
 	<div class="title-bar">
 		<ul class="controls"><li>$[reply_button]</li></ul>
-		<h1>$[conversation.subject]</h1>
+		<h2>$[conversation.subject]</h2>
 	</div>
 	<div class="control-bar ui-helper-clearfix $[scroll_class]">
 		$[search]
@@ -25,4 +25,5 @@
 		{/if}
 	</div>
 </div>
+
 $[quick_reply]

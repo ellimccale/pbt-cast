@@ -9,7 +9,7 @@
 			</colgroup>
 			<thead>
 				<tr class="heading">
-					<th class="groups_title">This Member's Groups</th>
+					<th>This Member's Groups</th>
 					<th>Leaders</th>
 					<th>Members</th>
 					<th>Status</th>
@@ -21,7 +21,7 @@
 						<td class="group_desc">
 							<a href="$[group.href]">$[group.name]</a>
 							<br />
-							{if $[group.description]}$[group.description]<br />{/if}
+							{if $[group.description]}$[group.description]<br>{/if}
 							<span class="small group-controls">
 								{foreach $[group.control]}$[group.control]{/foreach}
 							</span>
@@ -43,6 +43,7 @@
 		{/if}
 	</h4>
 {/if}
+
 {if $[other_group]}
 	<div class="content-box">
 		<table class="groups list">
@@ -54,7 +55,7 @@
 			</colgroup>
 			<thead>
 				<tr class="heading">
-					<th class="groups_title">Other Groups</th>
+					<th>Other Groups</th>
 					<th>Leaders</th>
 					<th>Members</th>
 					<th>{if $[user.id] == $[current_user.id]}Options{else}Status{/if}</th>
@@ -65,8 +66,8 @@
 					<tr id="$[other_group.content_id]" class="$[other_group.content_class]">
 						<td class="group_desc">
 							<a href="$[other_group.href]">$[other_group.name]</a>
-							<br />
-							{if $[other_group.description]}$[other_group.description]<br />{/if}
+							<br>
+							{if $[other_group.description]}$[other_group.description]<br>{/if}
 							<span class="small group-controls">
 								{foreach $[other_group.control]}$[other_group.control]{/foreach}
 							</span>

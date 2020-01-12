@@ -15,11 +15,12 @@
 			</table>
 		</td>
 		<td class="created-by clickable">$[thread.created_by]</td>
-		<td class="replies clickable">$[thread.replies]</td>
+		<td class="replies">$[thread.replies_count]</td>
 		<td class="views">$[thread.views]</td>
-		<td class="latest last">by $[thread.last_post.created_by]<br />$[thread.last_post.created_on]</td>
+		<td class="latest last">by $[thread.last_post.created_by]<br>$[thread.last_post.created_on]</td>
 	</tr>
 {/foreach}
+
 {if !$[thread]}
 	<tr class="last">
 		<td class="last center" colspan="7">No threads were found.</td>

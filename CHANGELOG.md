@@ -1,3 +1,6 @@
+### v4.0.0
+- So many changes...
+
 ### v2.0.6
 - Corrected the issue where clicking pagination links causes the Font Awesome glyphs to disappear
 

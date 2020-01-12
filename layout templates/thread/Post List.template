@@ -49,6 +49,7 @@
 		{/if}
 	</tr>
 {/foreach}
+
 {if !$[post]}
 	<tr class="last"><td class="last center" colspan="1">No posts were found.</td></tr>
 {/if}

@@ -29,10 +29,12 @@ $[form.header]
 				{/if}
 				<div class="content-box center-col">
 					<table>
-						<tr>
-							<td class="headings">Latest Status:</td>
-							<td>$[user.personal_text]</td>
-						</tr>
+                        {if $[user.personal_text.message]}
+                            <tr>
+                                <td class="headings">Latest Status:</td>
+                                <td>$[user.personal_text.message]</td>
+                            </tr>
+                        {/if}
 						{if $[user.custom_title]}
 							<tr>
 								<td class="headings">Custom Title:</td>
@@ -101,7 +103,7 @@ $[form.header]
 							<div class="social networks">
 								<h4>Social Networks</h4>
 								{foreach $[user.social_network]}
-									$[user.social_network]<br />
+									$[user.social_network]<br>
 								{/foreach}
 							</div>
 						{/if}
@@ -109,19 +111,18 @@ $[form.header]
 							<div class="social messengers">
 								<h4>Instant Messengers</h4>
 								{foreach $[user.instant_messenger]}
-									$[user.instant_messenger]<br />
+									$[user.instant_messenger]<br>
 								{/foreach}
 							</div>
 						{/if}
 					</div>
 				{/if}
 				<div class="content-box center-col">
-					$[recent_posts_link]<br />
+					$[recent_posts_link]<br>
 					$[recent_threads_created_link]
 				</div>
 				{if $[user.signature]}
 					<div class="content-box center-col">
-						Signature <hr />
 						$[user.signature]
 					</div>
 				{/if}

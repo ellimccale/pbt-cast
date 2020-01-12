@@ -1,6 +1,6 @@
 <div class="container members">
 	<div class="title-bar">
-		<h1>Member List</h1>
+		<h2>Member List</h2>
 	</div>
 	<div class="control-bar $[scroll_class] ui-helper-clearfix">
 		$[search]

@@ -3,7 +3,7 @@
 		{if $[reply_button]}
 			<ul class="controls"><li>$[reply_button]</li></ul>
 		{/if}
-		<h1>$[thread.subject]</h1>
+		<h2>$[thread.subject]</h2>
 	</div>
 	<div class="control-bar ui-helper-clearfix $[scroll_class]">
 		$[search]
@@ -26,4 +26,5 @@
 		{/if}{/if}
 	</div>
 </div>
+
 $[quick_reply]

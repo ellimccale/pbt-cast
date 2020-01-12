@@ -6,13 +6,14 @@
 		</div>
 	</div>
 {/if}
+
 {if $[display_thread_list]}
 	<div{if $[viewing_bookmarks]} id="bookmarks"{/if} class="container threads">
 		<div class="title-bar">
 			{if $[create_thread_button]}
 				<ul class="controls"><li>$[create_thread_button]</li></ul>
 			{/if}
-			<h1>$[board.display_name]</h1>
+			<h2>$[board.display_name]</h2>
 		</div>
 		<div class="control-bar ui-helper-clearfix $[scroll_class]">
 			$[search]

@@ -13,6 +13,7 @@
 		</td>
 	</tr>
 {/foreach}
+
 {if !$[message]}
 	<tr class="last"><td class="last center">No Messages were found.</td></tr>
 {/if}

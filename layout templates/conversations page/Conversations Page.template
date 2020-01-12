@@ -1,7 +1,7 @@
 <div class="container conversations">
 	<div class="title-bar">
 		<ul class="controls">{if $[create_conversation_button]}<li>$[create_conversation_button]</li>{/if}</ul>
-		<h1>Personal Messages: $[folder_pretty] ($[message_count])</h1>
+		<h2>Personal Messages: $[folder_pretty] ($[message_count])</h2>
 	</div>
 	<div class="control-bar ui-helper-clearfix $[scroll_class]">
 		$[search]
@@ -25,7 +25,7 @@
 						<th class="created-by">Created By</th>
 					{/if}
 					<th class="replies">Replies</th>
-					<th class="latest last">Last Reply</th>
+					<th class="latest">Last Reply</th>
 				</tr>
 			</thead>
 			<tbody class="list-content $[list_class]">

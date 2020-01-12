@@ -24,9 +24,10 @@
 			</td>
 		{/if}
 		<td class="replies clickable">$[conversation.replies]</td>
-		<td class="latest"><div>by $[conversation.last_message.created_by]<br />$[conversation.last_message.created_on]</div></td>
+		<td class="latest last">by $[conversation.last_message.created_by]<br>$[conversation.last_message.created_on]</td>
 	</tr>
 {/foreach}
+
 {if !$[conversation]}
 	<tr class="last">
 		<td class="last center" colspan="6">No messages were found</td>

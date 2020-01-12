@@ -11,6 +11,7 @@
 		</td>
 	</tr>
 {/foreach}
+
 {if !$[activity]}
 	<tr>
 		<td colspan="3" class="empty-result-message">

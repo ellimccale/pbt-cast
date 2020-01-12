@@ -13,6 +13,7 @@
 		</td>
 	</tr>
 {/foreach}
+
 {if !$[post]}
 	<tr class="last"><td class="last center">No Posts were found.</td></tr>
 {/if}

@@ -1,184 +1,299 @@
 <!DOCTYPE HTML>
 $[tag.html.open]
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <title>$[title] | $[forum.name]</title>
-    $[head]
-    <!-- Custom fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css'>
-    <link href='//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script>
-    $(document).ready(function(){
-        // Create darkened overlay behind recent threads modal
-        (function() {
-            if($('#recent-threads, #guests-online').length){
-                $('#recent-threads, #guests-online').dialog('option', 'modal', true);
-            } else {
-                $(document).on('dialogcreate', function(event){
-                    if(event.target.id == 'recent-threads' || 'guests-online'){
-                        $(event.target).dialog('option', 'modal', true);
-                    }
-                });
-            }
-        })();
+        <title>$[title] | $[forum.name]</title>
+
+        $[head]
         
-        // Remove double angle quotes from pagination
-        (function() {
-            var $paginationNext = $('.ui-pagination-next > a');
-            var $paginationPrev = $('.ui-pagination-prev > a');
+        <!-- Font Awesome 5.11.2 -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
 
-            $paginationNext.text($paginationNext.text().replace('»', ''));
-            $paginationPrev.text($paginationPrev.text().replace('«', ''));
-        })();
+        <!-- Open Sans -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i" rel="stylesheet">
 
-        // Replace default icons with Font Awesome glyphs
-        function replaceDefaultIcons() {
-            // Replace interaction icons with Font Awesome glyphs
-            $('a.likes-button > img').replaceWith('<i class="fa fa-heart"></i>');
-            $('.button .status > img').replaceWith('<i class="fa fa-cog"></i>');
-            $('.ui-search .search-filters-button .icon > img').replaceWith('<i class="fa fa-search"></i>');
+        <script>
+        $(function() {
+            /**
+             * Create darkened modal behind jQuery UI dialogs.
+             * Has to be in `<head>` to load in the right order.
+             */
+            (function darkenDialogOverlay() {
+                var open_ref = $.ui.dialog.prototype.open;
 
-            // Replace board on/off icons with Font Awesome glyphs
-            $('.board.item.new > td.icon > img').replaceWith('<i class="fa fa-folder"></i>');
-            $('.board.item.redirect > td.icon > img').replaceWith('<i class="fa fa-arrow-circle-o-right"></i>');
-            $('.board.item > td.icon > img').replaceWith('<i class="fa fa-folder-o"></i>');
-
-            // Replace thread/conversations icons with Font Awesome glyphs        
-            $('.thread > .icon > img').replaceWith('<i class="fa fa-comments-o"></i>');
-            $('.thread.sticky > .icon > i').replaceWith('<i class="fa fa-sticky-note-o"></i>');
-            $('.thread.announcement > .icon > i').replaceWith('<i class="fa fa-bullhorn"></i>');
-            $('.conversations .item > .icon > img').replaceWith('<i class="fa fa-envelope-o"></i>');
-            $('.conversations .item.new > .icon > i').replaceWith('<i class="fa fa-envelope"></i>');
-
-            // Append Font Awesome glyphs to tricky icons
-            $('.lock_icon').append('<i class="fa fa-lock"></i>');
-            $('.bookmark_icon').append('<i class="fa fa-bookmark"></i>');
-            $('.poll_icon').append('<i class="fa fa-bar-chart"></i>');
-
-            // Create an array for tricky icons
-            var $trickyIcons = ['.lock_icon','.bookmark_icon','.poll_icon'];
-
-            // Loop through each item of the tricky icons array
-            $.each($trickyIcons, function(index, value){
-                // Loop through each item of the array on the page
-                $(value).each(function(){
-                    // Check if child images are set to display: none
-                    if($(this).children('img').css('display') == 'none'){
-                        // Hide the parent if so
-                        // This works better than hiding the icon
-                        // It hides the padding as well
-                        $(this).css('display','none');
-                    };
-                    // Finally, remove child image from the DOM
-                    $(this).find('img').remove();
-                });
-            });
-
-            // Create variable for the checkmark container
-            var $checkContainer = $('.ui-poll .results tr td .select-box');
-
-            // Loop through each .select-box
-            $checkContainer.each(function(){
-                // Append the Font Awesome checkmark to .select-box
-                $(this).append($('<i class="fa fa-check"></i>'));
-
-                // Then remove the image from the DOM
-                $(this).children('img').remove();
-            });
-        }
+                $.ui.dialog.prototype.open = function() {
+                    this.options.modal = true;
+                    open_ref.apply(this, arguments);
+                }
+            })();
+        });
+        </script>
         
-        replaceDefaultIcons();
-        pb.events.on('pageChange', replaceDefaultIcons);
-    });
-    </script>
-
-    <script>
-    // Remove default inline styles from thread descriptions plugin
-    // Has to be on window.load
-    $(window).load(function(){
-        $('.thread_description_page').removeAttr('style');
-    });
-    </script>
-</head>
-<body>
-    {if $[maintenance_mode]}
-        <div class="maintenance-header">
-            {if $[can.disable_maintenance]}<p>Finished with maintenance? $[disable_maintenance_link].</p>{/if}
-        </div>
-    {/if}
-    
-    <div id="wrapper">
-        <header>
-            <div id="banner-container" role="banner">
-                <h2 id="banner">
-                    $[forum.title]
-                </h2>
-            </div>
-            
-            <a id="navigation-skip" href="#content" accesskey="s" class="aria-hidden" title="Skip Navigation">Skip Navigation</a>
-            <a href="#" accesskey="d" title="Open Menu" onclick="proboards.hotkeys.activate(Keys.d); return false;"></a>
-            <div id="navigation-menu" class="ui-helper-clearfix">
-                <ul role="navigation">
-                    {foreach $[navigation.menu]}
-                    <li>
-                        <a{if $[navigation.menu.active]} class="state-active"{/if} href="$[navigation.menu.href]"{if $[navigation.menu.accesskey]} accesskey="$[navigation.menu.accesskey]"{/if}>
-                            $[navigation.menu.name]
-                            {if $[navigation.menu.notification.total]}
-                            <div class="tip-holder" onclick="window.location='$[navigation.menu.notification.href]'; return false;">
-                                <div class="tip-number">$[navigation.menu.notification.total]</div>
-                                <span class="tip"></span>
-                            </div>
-                            {/if}
-                        </a>
-                    </li>
-                    {/foreach}
-                </ul>
-                <p id="welcome">
-                    {if !$[current_user.is_member]}
-                    Welcome Guest.  
-                    {if $[login_link] || $[register_link]}
-                    Please $[login_link]{if $[login_link] && $[register_link]} or {/if}$[register_link].
-                    {/if}
-                    {else}
-                    Welcome $[current_user.name]. $[logout_link]
-                    {/if}
-                </p>
-            </div>
-        </header>
-
-        $[participated_threads_link]
-
-        {if $[navigation.tree]}
-            <div id="navigation-tree">
-                $[navigation.tree]
+        <script>
+        $(window).load(function() {
+            /**
+             * Remove inline styles from Thread Descriptions plugin.
+             * Has to be on window.load in `head`.
+             */
+            $('.thread_description_page').removeAttr('style');
+        });
+        </script>
+    </head>
+    <body>
+        {if $[maintenance_mode]}
+            <div class="maintenance-header">
+                {if $[can.disable_maintenance]}<p>Finished with maintenance? $[disable_maintenance_link].</p>{/if}
             </div>
         {/if}
 
-        $[header]
-
-        <div id="content" role="main">
-            {if $[notice]}
-                <div class="container">
-                    <div class="title-bar"><h2>$[notice.title]</h2></div>
-                    <div class="content pad-all cap-bottom">
-                        $[notice.message]
+        <div id="wrapper">
+            <header>
+                <div id="banner-container" role="banner">
+                    <h1 id="banner">
+                        $[forum.title]
+                    </h1>
+                </div>
+                <nav role="navigation">
+                    <a id="navigation-skip" href="#content" accesskey="s" class="aria-hidden" title="Skip Navigation">Skip Navigation</a>
+                    <a href="#" accesskey="d" title="Open Menu" onclick="proboards.hotkeys.activate(Keys.d); return false;"></a>
+                    <div id="navigation-menu" class="ui-helper-clearfix">
+                        <ul>
+                            {foreach $[navigation.menu]}
+                                <li{if $[navigation.menu.active]} class="state-active"{/if}>
+                                    <a href="$[navigation.menu.href]"{if $[navigation.menu.accesskey]} accesskey="$[navigation.menu.accesskey]"{/if}>
+                                        $[navigation.menu.name]
+                                        {if $[navigation.menu.notification.total]}
+                                            <div class="tip-holder" onclick="window.location='$[navigation.menu.notification.href]'; return false;">
+                                                <div class="tip-number">$[navigation.menu.notification.total]</div>
+                                                <span class="tip"></span>
+                                            </div>
+                                        {/if}
+                                    </a>
+                                </li>
+                            {/foreach}
+                        </ul>
+                        <p id="welcome">
+                            {if !$[current_user.is_member]}
+                                Welcome Guest.  
+                                {if $[login_link] || $[register_link]}
+                                    Please $[login_link]{if $[login_link] && $[register_link]} or {/if}$[register_link].
+                                {/if}
+                            {else}
+                                Welcome $[current_user.name]. $[logout_link]
+                            {/if}
+                        </p>
                     </div>
+                </nav>
+            </header>
+            
+            {if $[navigation.tree]}
+                $[participated_threads_link]
+
+                <div id="navigation-tree">
+                    $[navigation.tree]
                 </div>
             {/if}
             
-            $[content]
+            $[header]
             
-            $[shoutbox]
+            <main id="content">
+                {if $[notice]}
+                    <div class="container">
+                        <div class="title-bar"><h2>$[notice.title]</h2></div>
+                        <div class="content pad-all cap-bottom">
+                            $[notice.message]
+                        </div>
+                    </div>
+                {/if}
+
+                $[content]
+
+                $[shoutbox]
+            </main>
         </div>
-    </div>
-    
-    <div id="footer">
+            
         $[footer]
-    </div>
-    
-    {if $[is_mobile_browser]}
-    	<br /><p class="center">Switch to the $[mobile_switch_link].</p>
-    {/if}
-</body>
+
+        {if $[is_mobile_browser]}
+            <p id="js-switch-link">Switch to the $[mobile_switch_link].</p>
+        {/if}
+        
+        <script>
+        $(function() {
+            // Add lang attribute to `<html>` element for accessibility
+            (function addLang() {
+                $('html').attr('lang', 'en-us');
+            })();
+
+            // Add classes to ad containers
+            (function containAds() {
+                $('iframe#ad-desktop-top').parent().attr('class', 'ad-banner ad-banner--top');
+                $('iframe#ad-desktop-top[height="50"]').parent().addClass('ad-banner--top-50');
+                $('iframe#ad-desktop-top[height="60"]').parent().addClass('ad-banner--top-60');
+                $('iframe#ad-desktop-top[height="90"]').parent().addClass('ad-banner--top-90');
+                $('iframe#ad-desktop-top[height="250"]').parent().addClass('ad-banner--top-250');
+                $('iframe#ad-desktop-bottom').parent().attr('class', 'ad-banner ad-banner--bottom');
+            })();
+            
+            // Remove double angle quotes from pagination
+            (function removeAngleQuotes() {
+                var $pageNext = $('.ui-pagination-next > a');
+                var $pagePrev = $('.ui-pagination-prev > a');
+
+                $pageNext.text($pageNext.text().replace('»', ''));
+                $pagePrev.text($pagePrev.text().replace('«', ''));
+            })();
+
+            // Replace default icons with Font Awesome glyphs
+            (function replaceDefaultIcons() {
+
+                // Board on/off icons
+                $('.board.item.new > td.icon > img').replaceWith('<i class="fas fa-folder" title="New Posts"></i>');
+                $('.board.item.redirect > td.icon > img').replaceWith('<i class="fas fa-arrow-circle-right" title="Redirect"></i>');
+                $('.board.item > td.icon > img').replaceWith('<i class="far fa-folder" title="No New Posts"></i>');
+
+                // Shoutbox refresh icon
+                $('.shoutbox_form .button').attr('title', 'Refresh');
+                $('.shoutbox_form .button img').replaceWith('<i class="fas fa-sync-alt"></i>');
+
+                // Legend on/off icons
+                var $legendIcons = $('.legend .content td > img');
+
+                $legendIcons.each(function() {
+                    var $this = $(this);
+
+                    if ($this.prop('alt') === 'New Posts') {
+
+                        // New Posts icon
+                        $this.replaceWith('<i class="fas fa-folder" aria-hidden="true"></i>');
+
+                    } else if ($this.prop('alt') === 'No New Posts') {
+
+                        // No New Posts icon
+                        $this.replaceWith('<i class="far fa-folder" aria-hidden="true"></i>');
+
+                    }
+                });
+
+                // Info Center icons
+                var $infoIcons = $('.stats .content td.icon > img');
+
+                $infoIcons.each(function() {
+                    var $this = $(this);
+
+                    if ($this.prop('alt') === 'Board Statistics') {
+
+                        // Threads and Posts icon
+                        $this.replaceWith('<i class="fas fa-info-circle" aria-hidden="true"></i>');
+
+                    } else if ($this.prop('alt') === 'Members') {
+
+                        // Members icon
+                        $this.replaceWith('<i class="fas fa-users" aria-hidden="true"></i>');
+
+                    } else if ($this.prop('alt') === 'Members Online') {
+
+                        // Users Online icon
+                        $this.replaceWith('<i class="fas fa-user-circle" aria-hidden="true"></i>');
+
+                    } else if ($this.prop('alt') === '24 Hours') {
+
+                        // Users Online in the Last 24 Hours icon
+                        $this.replaceWith('<i class="fas fa-clock" aria-hidden="true"></i>');
+
+                    }
+                });
+
+                // Icons that need to be updated on afterSearch
+                function paginateIcons() {
+
+                    // Post/Message interaction icons
+                    $('.button .status').parent().attr('title', 'Options');
+                    $('.button .status > img').replaceWith('<i class="fas fa-cog" aria-hidden="true"></i>');
+                    $('.ui-search .search-filters-button').attr('title', 'Search');
+                    $('.ui-search .search-filters-button .icon > img').replaceWith('<i class="fas fa-search" aria-hidden="true"></i>');
+
+                    // Like icon
+                    function replaceLikeButton() {
+                        var $likeButtonImg = $('a.likes-button');
+
+                        $likeButtonImg.each(function() {
+                            var $this = $(this);
+
+                            if ($this.hasClass('liked')) {
+                                $this.attr('title', 'Unlike');
+                                $this.children('img').replaceWith('<i class="fas fa-heart" aria-hidden="true"></i>');
+                            } else {
+                                $this.attr('title', 'Like');
+                                $this.children('img').replaceWith('<i class="far fa-heart" aria-hidden="true"></i>');
+                            }
+                        });
+                    }
+
+                    function updateLikeButton() {
+                        var $this = $(this);
+
+                        if ($this.hasClass('liked')) {
+                            $this.attr('title', 'Like');
+                            $this.children('i').removeClass('fas').addClass('far');
+                        } else {
+                            $this.attr('title', 'Unlike');
+                            $this.children('i').removeClass('far').addClass('fas');
+                        }
+                    }
+
+                    replaceLikeButton();
+                    $('a.likes-button').on('click', updateLikeButton);
+
+                    // Thread/Conversation icons
+                    $('.thread > .icon > img').replaceWith('<i class="far fa-comments" title="Thread"></i>');
+                    $('.thread.sticky > .icon > i').replaceWith('<i class="far fa-sticky-note" title="Stickied Thread"></i>');
+                    $('.thread.announcement > .icon > i').replaceWith('<i class="fas fa-bullhorn" title="Announcement"></i>');
+                    $('.conversations .item > .icon > img').replaceWith('<i class="far fa-envelope" title="Message"></i>');
+                    $('.conversations .item.new > .icon > i').replaceWith('<i class="fas fa-envelope" title="New Message"></i>');
+
+                    // Thread status icons
+                    var lockIcon = '<i class="fas fa-lock"></i>';
+                    var bookmarkIcon = '<i class="fas fa-bookmark"></i>';
+                    var pollIcon = '<i class="fas fa-chart-bar"></i>';
+                    var fallingIcon = '<i class="fas fa-anchor"></i>';
+
+                    function replaceThreadIcons(oldIcon, newIcon, title) {
+                        $(oldIcon).each(function() {
+                            var $this = $(this);
+
+                            if (!$this.find('i').length) {
+                                $this.attr('title', title);
+                                $this.append(newIcon);
+                                $this.find('img').remove();
+                            }
+                        });
+                    }
+
+                    replaceThreadIcons('.lock_icon', lockIcon, 'Locked');
+                    replaceThreadIcons('.bookmark_icon', bookmarkIcon, 'Bookmarked');
+                    replaceThreadIcons('.poll_icon', pollIcon, 'Poll');
+                    replaceThreadIcons('.falling_icon', fallingIcon, 'This thread is falling');
+
+                    // Checkmark icon
+                    var $checkContainer = $('.ui-poll .results tr td .select-box');
+
+                    $checkContainer.each(function() {
+                        var $this = $(this);
+
+                        if (!$this.find('i').length) {
+                            $this.append('<i class="fas fa-check" aria-hidden="true"></i>');
+                            $this.children('img').remove();
+                        }
+                    });
+                }
+
+                paginateIcons();
+                pb.events.on('afterSearch', paginateIcons);
+            })();
+        });
+        </script>
+    </body>
 </html>

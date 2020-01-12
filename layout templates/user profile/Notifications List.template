@@ -9,6 +9,7 @@
 		</td>
 	</tr>
 {/foreach}
+
 {if !$[notification]}
 	<tr id="no-notifications-row">
 		<td colspan="2" class="empty-result-message">

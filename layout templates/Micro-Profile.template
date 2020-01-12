@@ -13,7 +13,7 @@
 			<div class="nowrap group-overflow">$[user.group.name]</div>
 			$[user.group.stars]
 		{else}
-			$[user.rank.name]<br />
+			$[user.rank.name]<br>
 			$[user.rank.stars]
 		{/if}
 	</div>

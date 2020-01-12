@@ -1,6 +1,6 @@
 <div class="container edit-user confirm-ignore-changes">
 	<div class="title-bar">
-		<h1>Edit Profile &amp; Settings</h1>
+		<h2>Edit Profile &amp; Settings</h2>
 	</div>
 	<div class="content cap-bottom">
 		<div class="ui-tabMenu">
@@ -12,7 +12,7 @@
 		</div>
 		<div class="pad info">
 			<span class="username float-right">Username: <span class="description">$[user.username]</span></span>
-			<span class="big_username" style="color: $[user.color];">$[user.name]</span><br />
+			<span class="big_username" style="color: $[user.color];">$[user.name]</span><br>
 		</div>
         <noscript>
             <div class="content-box">Please enable Javascript for your browser to edit member profiles.</div>

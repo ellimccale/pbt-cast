@@ -29,17 +29,3 @@
 		</table>
 	</div>
 </div>
-{if $[legend]}
-	<div class="container legend">
-		<div class="title-bar"><h2>Legend</h2></div>
-		<div class="content">
-			<table>
-				<tr>
-					{foreach $[legend]}
-						<td>$[legend.icon] <span>$[legend.name]</span></td>
-					{/foreach}
-				</tr>
-			</table>
-		</div>
-	</div>
-{/if}
