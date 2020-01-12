@@ -3,7 +3,7 @@
 
 Built with the purpose of being redistributed as your own creation, you are free and encouraged to edit any part of this theme. You do not need to credit or reference me if you use this as a base for a premade or commission, but it would be cool to see what you build! That being said, a lot of personal time and effort were invested in tweaking and testing these files, and as such, my only request is that you don't explicitly claim *cast* (as a base theme) as your own.
 
-Be sure to review the [Readme PDF](cast-skin-readme.pdf) for additional information, the installation guide, and a bunch of super useful tutorials for various remodels. This also talks more about how to use the stylesheet and where to recolor the forum icons. Please reference this document before creating issues or posting for Support! It may already be answered.
+Be sure to review the [Readme PDF](cast-skin-readme.pdf) for additional information and the installation guide. This also talks more about how to use the stylesheet and where to recolor the forum icons. Please reference this document before creating issues or posting for Support! It may already be answered.
 
 If you're less familiar with ProBoards themes or CSS/HTML, I would suggest reviewing these resources before getting started.
 
