@@ -1,0 +1,350 @@
+<!DOCTYPE HTML>
+$[tag.html.open]
+	<head>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>$[title] | $[forum.name]</title>
+
+		$[head]
+
+		<!-- Open Sans -->
+		<link href="https://fonts.gstatic.com" rel="preconnect">
+		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+
+		<script>
+		$(function() {
+			/**
+			 * Create darkened modal behind jQuery UI dialogs.
+			 * Has to be in `<head>` to load in the right order.
+			 */
+			(function darkenDialogOverlay() {
+				var open_ref = $.ui.dialog.prototype.open;
+
+				$.ui.dialog.prototype.open = function() {
+					this.options.modal = true;
+					open_ref.apply(this, arguments);
+				}
+			})();
+		});
+		</script>
+
+		<script>
+		$(window).load(function() {
+			/**
+			 * Remove inline styles from Thread Descriptions plugin.
+			 * Has to be on window.load in `head`.
+			 */
+			$('.thread_description_page').removeAttr('style');
+		});
+		</script>
+	</head>
+	<body>
+
+		{if $[maintenance_mode]}
+			<div class="maintenance-header">
+				{if $[can.disable_maintenance]}<p>Finished with maintenance? $[disable_maintenance_link].</p>{/if}
+			</div>
+		{/if}
+
+		<!-- Forum Wrapper -->
+		<div id="wrapper">
+
+			<!-- Header -->
+			<header>
+				<div id="banner-container">
+					<h1 id="banner">
+						$[forum.title]
+					</h1>
+				</div>
+
+				<!-- Primary Navigation -->
+				<nav aria-labelledby="primary-navigation">
+
+					<!-- Label for this navigation; read by screen readers -->
+					<h2 id="primary-navigation" class="visually-hidden">Primary Navigation</h2>
+
+					<!-- Links for keyboard users to skip to content -->
+					<a id="navigation-skip" href="#content" accesskey="s" class="visually-hidden" title="Skip Navigation">Skip Navigation</a>
+					<a href="#" accesskey="d" title="Open Menu" onclick="proboards.hotkeys.activate(Keys.d); return false;"></a>
+
+					<!-- Menu -->
+					<div id="navigation-menu" class="ui-helper-clearfix">
+						<ul>
+							{foreach $[navigation.menu]}
+								<li{if $[navigation.menu.active]} class="state-active"{/if}>
+									<a href="$[navigation.menu.href]"{if $[navigation.menu.accesskey]} accesskey="$[navigation.menu.accesskey]"{/if}>
+										$[navigation.menu.name]
+										{if $[navigation.menu.notification.total]}
+											<div class="tip-holder" onclick="window.location='$[navigation.menu.notification.href]'; return false;">
+												<div class="tip-number">$[navigation.menu.notification.total]</div>
+												<span class="tip"></span>
+											</div>
+										{/if}
+									</a>
+								</li>
+							{/foreach}
+						</ul>
+
+						<!-- Welcome Message -->
+						<p id="welcome">
+							{if !$[current_user.is_member]}
+								Welcome Guest. 
+								{if $[login_link] || $[register_link]}
+									Please $[login_link]{if $[login_link] && $[register_link]} or {/if}$[register_link].
+								{/if}
+							{else}
+								Welcome $[current_user.name]. $[logout_link]
+							{/if}
+						</p>
+						<!-- / Welcome Message -->
+
+					</div>
+					<!-- / Menu -->
+
+				</nav>
+				<!-- / Primary Navigation -->
+
+			</header>
+			<!-- / Header -->
+
+			<!-- Required variable: contains PB scripts and ads -->
+			$[header]
+
+			{if $[navigation.tree]}
+
+				<!-- Participated Threads -->
+				$[participated_threads_link]
+
+				<!-- Navigation Tree -->
+				<div id="navigation-tree">
+					$[navigation.tree]
+				</div>
+				<!-- / Navigation Tree -->
+
+			{/if}
+
+			<!-- Main Content -->
+			<main id="content">
+				{if $[notice]}
+
+					<!-- Notice -->
+					<div class="container">
+						<div class="title-bar"><h2>$[notice.title]</h2></div>
+						<div class="content">$[notice.message]</div>
+					</div>
+					<!-- / Notice -->
+
+				{/if}
+
+				$[content]
+
+				$[shoutbox]
+			</main>
+			<!-- / Main Content -->
+
+		</div>
+		<!-- / Forum Wrapper -->
+
+		<!-- Required variable: contains PB scripts and ads -->
+		$[footer]
+
+		<!--
+		  NOTE: This link only appears on mobile browsers, and gives users the option to
+		  switch to the mobile version of the forum.
+		  -->
+		{if $[is_mobile_browser]}
+			<p id="js-switch-link">Switch to the $[mobile_switch_link].</p>
+		{/if}
+
+		<script>
+		$(function() {
+			// Add lang attribute to `<html>` element to improve accessibility
+			(function addLang() {
+				$('html').attr('lang', 'en-us');
+			})();
+
+			// Add classes to ad containers
+			(function containAds() {
+				$('iframe#ad-desktop-top').parent().attr('class', 'ad-banner ad-banner--top');
+				$('iframe#ad-desktop-top[height="50"]').parent().addClass('ad-banner--top-50');
+				$('iframe#ad-desktop-top[height="60"]').parent().addClass('ad-banner--top-60');
+				$('iframe#ad-desktop-top[height="90"]').parent().addClass('ad-banner--top-90');
+				$('iframe#ad-desktop-top[height="250"]').parent().addClass('ad-banner--top-250');
+				$('iframe#ad-desktop-bottom').parent().attr('class', 'ad-banner ad-banner--bottom');
+			})();
+
+			// Modifications to footer
+			(function modFooter() {
+				var $footer = $('.c-footer');
+
+				// Append mobile switch link
+				$('#js-switch-link').appendTo($footer);
+			})();
+
+			// Remove double angle quotes from pagination
+			(function removeAngleQuotes() {
+				var $pageNext = $('.ui-pagination-next > a');
+				var $pagePrev = $('.ui-pagination-prev > a');
+
+				$pageNext.text($pageNext.text().replace('»', ''));
+				$pagePrev.text($pagePrev.text().replace('«', ''));
+			})();
+
+			// Replace default icons with Font Awesome icons
+			(function replaceDefaultIcons() {
+
+				// Board on/off icons
+				$('.board.item.new > td.icon > img').replaceWith('<i class="fas fa-folder" title="New Posts"></i>');
+				$('.board.item.redirect > td.icon > img').replaceWith('<i class="fas fa-arrow-circle-right" title="Redirect"></i>');
+				$('.board.item > td.icon > img').replaceWith('<i class="far fa-folder" title="No New Posts"></i>');
+
+				// Shoutbox refresh icon
+				$('.shoutbox_form .button').attr('title', 'Refresh');
+				$('.shoutbox_form .button img').replaceWith('<i class="fas fa-sync-alt"></i>');
+
+				// Legend on/off icons
+				var $legendIcons = $('.legend .content td > img');
+
+				$legendIcons.each(function() {
+					var $this = $(this);
+
+					if ($this.prop('alt') === 'New Posts') {
+
+						// New Posts icon
+						$this.replaceWith('<i class="fas fa-folder" aria-hidden="true"></i>');
+
+					} else if ($this.prop('alt') === 'No New Posts') {
+
+						// No New Posts icon
+						$this.replaceWith('<i class="far fa-folder" aria-hidden="true"></i>');
+
+					}
+				});
+
+				// Info Center icons
+				var $infoIcons = $('.stats .content td.icon > img');
+
+				$infoIcons.each(function() {
+					var $this = $(this);
+
+					if ($this.prop('alt') === 'Board Statistics') {
+
+						// Threads and Posts icon
+						$this.replaceWith('<i class="fas fa-info-circle" aria-hidden="true"></i>');
+
+					} else if ($this.prop('alt') === 'Members') {
+
+						// Members icon
+						$this.replaceWith('<i class="fas fa-users" aria-hidden="true"></i>');
+
+					} else if ($this.prop('alt') === 'Members Online') {
+
+						// Users Online icon
+						$this.replaceWith('<i class="fas fa-user-circle" aria-hidden="true"></i>');
+
+					} else if ($this.prop('alt') === '24 Hours') {
+
+						// Users Online in the Last 24 Hours icon
+						$this.replaceWith('<i class="fas fa-clock" aria-hidden="true"></i>');
+
+					}
+				});
+
+				// Icons that need to be updated on afterSearch
+				function paginateIcons() {
+
+					// Post/Message interaction icons
+					$('.button .status').parent().attr('title', 'Options');
+					$('.button .status > img').replaceWith('<i class="fas fa-cog" aria-hidden="true"></i>');
+					$('.ui-search .search-filters-button').attr('title', 'Search');
+					$('.ui-search .search-filters-button .icon > img').replaceWith('<i class="fas fa-search" aria-hidden="true"></i>');
+
+					// Like icon
+					function replaceLikeButton() {
+						var $likeButtonImg = $('a.likes-button');
+
+						$likeButtonImg.each(function() {
+							var $this = $(this);
+
+							if ($this.hasClass('liked')) {
+								$this.attr('title', 'Unlike');
+								$this.children('img').replaceWith('<i class="fas fa-heart" aria-hidden="true"></i>');
+							} else {
+								$this.attr('title', 'Like');
+								$this.children('img').replaceWith('<i class="far fa-heart" aria-hidden="true"></i>');
+							}
+						});
+					}
+
+					function updateLikeButton() {
+						var $this = $(this);
+
+						if ($this.hasClass('liked')) {
+							$this.attr('title', 'Like');
+							$this.children('i').removeClass('fas').addClass('far');
+						} else {
+							$this.attr('title', 'Unlike');
+							$this.children('i').removeClass('far').addClass('fas');
+						}
+					}
+
+					replaceLikeButton();
+					$('a.likes-button').on('click', updateLikeButton);
+
+					// Thread/Conversation icons
+					$('.thread > .icon > img').replaceWith('<i class="far fa-comments" title="Thread"></i>');
+					$('.thread.sticky > .icon > i').replaceWith('<i class="far fa-sticky-note" title="Stickied Thread"></i>');
+					$('.thread.announcement > .icon > i').replaceWith('<i class="fas fa-bullhorn" title="Announcement"></i>');
+					$('.conversations .item > .icon > img').replaceWith('<i class="far fa-envelope" title="Message"></i>');
+					$('.conversations .item.new > .icon > i').replaceWith('<i class="fas fa-envelope" title="New Message"></i>');
+
+					// Thread status icons
+					var lockIcon = '<i class="fas fa-lock"></i>';
+					var bookmarkIcon = '<i class="fas fa-bookmark"></i>';
+					var pollIcon = '<i class="fas fa-chart-bar"></i>';
+					var fallingIcon = '<i class="fas fa-anchor"></i>';
+
+					function replaceThreadIcons(oldIcon, newIcon, title) {
+						$(oldIcon).each(function() {
+							var $this = $(this);
+
+							if (!$this.find('i').length) {
+								$this.attr('title', title);
+								$this.append(newIcon);
+								$this.find('img').remove();
+							}
+						});
+					}
+
+					replaceThreadIcons('.lock_icon', lockIcon, 'Locked');
+					replaceThreadIcons('.bookmark_icon', bookmarkIcon, 'Bookmarked');
+					replaceThreadIcons('.poll_icon', pollIcon, 'Poll');
+					replaceThreadIcons('.falling_icon', fallingIcon, 'This thread is falling');
+
+					// Checkmark icon
+					var $checkContainer = $('.ui-poll .results tr td .select-box');
+
+					$checkContainer.each(function() {
+						var $this = $(this);
+
+						if (!$this.find('i').length) {
+							$this.append('<i class="fas fa-check" aria-hidden="true"></i>');
+							$this.children('img').remove();
+						}
+					});
+				}
+
+				paginateIcons();
+				pb.events.on('afterSearch', paginateIcons);
+			})();
+		});
+		</script>
+		<img src="https://ellimccale.com/projects/proboards/pixel.gif" alt="" class="visually-hidden">
+
+	</body>
+</html>

@@ -1,4 +1,4 @@
-# cast v4.0.0
+# cast v4.1.0
 *cast* is a theme skeleton built for the free forum software [ProBoards](https://proboards.com/). It's made up of basic adjustments to the default ProBoards theme, including a more neutral color scheme and multiple fixes to styles, layout templates, and markup. Its intended audience is intermediate to advanced users creating custom ProBoards themes. Those more familiar with CSS will find this theme easiest to customize through the stylesheet.
 
 Built with the purpose of being redistributed as your own creation, you are free and encouraged to edit any part of this theme. You do not need to credit or reference me if you use this as a base for a premade or commission, but it would be cool to see what you build! That being said, a lot of personal time and effort were invested in tweaking and testing these files, and as such, my only request is that you don't explicitly claim *cast* (as a base) as your own.

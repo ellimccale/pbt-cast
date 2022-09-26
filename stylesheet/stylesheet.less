@@ -3,9 +3,8 @@
  * Theme URI:  http://v5-skin-skeleton.proboards.com
  * Author:     Elli
  * Author URI: http://ellimccale.com/
- * Version:    4.0.0
+ * Version:    4.1.0
  */
-
 
 /* ======================================================
  * Embedded Fonts
@@ -36,7 +35,6 @@
  *  }
  */
 
-
 /* ======================================================
  * Mixins
  * ====================================================== */
@@ -61,7 +59,7 @@
 /**
  * A more intuitive method of defining color using hue,
  * saturation, lightness, and alpha (opacity) rather
- * than RGBA - red, green, blue, and alpha.
+ * than RGBA -- red, green, blue, and alpha.
  */
 
 .hsla-bgcolor-safe(transparent, @alpha) {
@@ -73,133 +71,27 @@
     background-color: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
 }
 
-
-/* ======================================================
- * Flexbox Mixins
- * ====================================================== */
-
 /**
- * Used for responsive behavior on non-tablular elements,
- * as well as alignment options that are otherwise
- * onerous with old-school CSS.
- *
- * https://gist.github.com/gyandeeps/c31f83e0eebf3a1c664cd5cc04cc9836
+ * Reusable styles for quickly creating ellipsis
+ * overflow text.
  */
 
-.flex-display(@display: flex) {
-    display: ~"-webkit-@{display}";
-    display: ~"-moz-@{display}";
-    display: ~"-ms-@{display}box"; // IE10 uses -ms-flexbox
-    display: ~"-ms-@{display}"; // IE11
-    display: @display;
+.text-overflow() {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
-.flex-direction(@direction: row) {
-    -webkit-flex-direction: @direction;
-    -moz-flex-direction: @direction;
-    -ms-flex-direction: @direction;
-    flex-direction: @direction;
+/**
+ * Simple mixin for defining transition properties
+ * with prefixes.
+ */
+
+.transition(...) {
+    -webkit-transition: @arguments;
+    -o-transition: @arguments;
+    transition: @arguments;
 }
-
-.flex-wrap(@wrap: nowrap) {
-    -webkit-flex-wrap: @wrap;
-    -moz-flex-wrap: @wrap;
-    -ms-flex-wrap: @wrap;
-    flex-wrap: @wrap;
-}
-
-.flex-grow(@grow: 0) {
-    -webkit-flex-grow: @grow;
-    -moz-flex-grow: @grow;
-    -ms-flex-grow: @grow;
-    flex-grow: @grow;
-}
-
-.flex-shrink(@shrink: 1) {
-    -webkit-flex-shrink: @shrink;
-    -moz-flex-shrink: @shrink;
-    -ms-flex-shrink: @shrink;
-    flex-shrink: @shrink;
-}
-
-.flex-basis(@width: auto) {
-    -webkit-flex-basis: @width;
-    -moz-flex-basis: @width;
-    -ms-flex-basis: @width;
-    flex-basis: @width;
-}
-
-.justify-content(@justify: flex-start) {
-    .ms-flex-justify(@value) {
-        ._(@value);
-        ._(space-between) { -ms-flex-pack: justify;      }
-        ._(space-around)  { -ms-flex-pack: distribute;   }
-        ._(space-evenly)  { -ms-flex-pack: space-evenly; }
-        ._(flex-end)      { -ms-flex-pack: end;          }
-        ._(flex-start)    { -ms-flex-pack: start;        }
-        ._(center)        { -ms-flex-pack: center;       }
-    }
-
-    -webkit-justify-content: @justify;
-    -moz-justify-content: @justify;
-    -ms-justify-content: @justify;
-    justify-content: @justify;
-    .ms-flex-justify(@justify);
-}
-
-.align-items(@align: stretch) {
-    .ms-flex-align(@value) {
-        ._(@value);
-        ._(baseline)    { -ms-flex-align: baseline; }
-        ._(stretch)     { -ms-flex-align: stretch;  }
-        ._(flex-end)    { -ms-flex-align: end;      }
-        ._(flex-start)  { -ms-flex-align: start;    }
-        ._(center)      { -ms-flex-align: center;   }
-    }
-
-    -webkit-align-items: @align;
-    -moz-align-items: @align;
-    -ms-align-items: @align;
-    align-items: @align;
-    .ms-flex-align(@align);
-}
-
-.align-content(@align: normal) {
-    .ms-flex-line-pack(@value) {
-        ._(@value);
-        ._(flex-start)    { -ms-flex-line-pack: start;        }
-        ._(flex-end)      { -ms-flex-line-pack: end;          }
-        ._(baseline)      { -ms-flex-line-pack: baseline;     }
-        ._(space-between) { -ms-flex-line-pack: justify;      }
-        ._(space-around)  { -ms-flex-line-pack: distribute;   }
-        ._(space-evenly)  { -ms-flex-line-pack: space-evenly; }
-        ._(stretch)       { -ms-flex-line-pack: stretch;      }
-    }
-
-    align-content: @align;
-    .ms-flex-line-pack(@align);
-}
-
-.align-self(@align: auto) {
-    .ms-flex-align-self(@msSelfAlign) when (@msSelfAlign = flex-end) {
-        -ms-flex-item-align: end;
-    }
-
-    .ms-flex-align-self(@msSelfAlign) when (@msSelfAlign = flex-start) {
-        -ms-flex-item-align: start;
-    }
-
-    .ms-flex-align-self(@msSelfAlign) when (@msSelfAlign = auto), (@msSelfAlign = center),(@msSelfAlign = baseline), (@msSelfAlign = stretch) {
-        -ms-flex-item-align: @msSelfAlign;
-    }
-
-    -webkit-align-self: @align;
-    -moz-align-self: @align;
-    -ms-align-self: @align;
-    align-self: @align;
-    .ms-flex-align-self(@align);
-}
-
 
 /* ======================================================
  * Theme Customization
@@ -224,17 +116,6 @@
  * @font_family_1: "Open Sans", Verdana, sans-serif;
  */
 
-@screen_sm: 768px;
-@screen_md: 992px;
-@screen_lg: 1200px;
-@screen_xl: 1440px;
-
-@screen_xs_max: @screen_sm - 1;
-@screen_sm_max: @screen_md - 1;
-@screen_md_max: @screen_lg - 1;
-@screen_lg_max: @screen_xl - 1;
-
-
 /* ======================================================
  * ProBoards Theme Creator Variables (Required)
  * ====================================================== */
@@ -248,8 +129,8 @@
 @banner_height: 100px;
 @banner_background_color: #95a5a6;
 @banner_background_image: @empty;
-@banner_background_position: @empty;
 @banner_background_repeat: @empty;
+@banner_background_position: @empty;
 @banner_text_color: #fff;
 @banner_text_align: left;
 
@@ -278,15 +159,14 @@
 @pagination_text_color: #95a5a6;
 @pagination_hover_color: #fff;
 
-
 /* ======================================================
  * ProBoards Default Variables
  * ====================================================== */
 
-@images_path: '//storage.proboards.com/forum/images';
+@images_path: 'https://storage.proboards.com/forum/images';
 
-@body_background_attachment: @empty;
 @body_background_repeat: @empty;
+@body_background_attachment: @empty;
 @body_background_position: @empty;
 
 @default_forum_text_font_style: @empty;
@@ -299,7 +179,7 @@
 @bold_weight: 700;
 @italic_style: italic;
 
-@link_font: 100% @default_forum_text_font_family;
+@link_font: inherit;
 @link_decoration: none;
 @link_active_decoration: @link_decoration;
 @link_active_color: @link_color;
@@ -310,27 +190,26 @@
 
 @container_links_hover_color: @link_hover_color;
 
-@h2_font: 1.3rem @default_forum_text_font_family;
+@h2_font: 1.4rem @default_forum_text_font_family;
 @h2_decoration: @empty;
 @h2_case: @empty;
 @h2_color: @empty;
-@h3_font: 1.8rem @default_forum_text_font_family;
+@h3_font: 1.6rem @default_forum_text_font_family;
 @h3_decoration: @empty;
 @h3_case: @empty;
 @h3_color: @empty;
 
-@timestamp_font: italic 100% @default_forum_text_font_family;
-@timestamp_color: lighten(@container_text_color_1, 15%);
+@timestamp_font: inherit;
+@timestamp_color: inherit;
 
-@description_font: italic 1.1rem @default_forum_text_font_family;
-@description_color: @empty;
+@description_font: inherit;
+@description_color: inherit;
 
-@viewing_font: 1.1rem @default_forum_text_font_family;
-@viewing_color: @empty;
+@viewing_font: inherit;
+@viewing_color: inherit;
 
-@small_desc_font: 1.1rem @default_forum_text_font_family;
-@small_desc_color: @empty;
-
+@small_desc_font: inherit;
+@small_desc_color: inherit;
 
 /* ======================================================
  * Base Styles
@@ -360,21 +239,23 @@
  *    https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
  */
 
-html { font-size: 62.5%; -webkit-text-size-adjust: 100%; .box-sizing(); } /* 1 */
+html {
+    font-size: 62.5%;
+    -webkit-text-size-adjust: 100%;
+    .box-sizing(); /* 1 */
+}
 
-body { background-color: @body_background_color; background-image: @body_background_image; background-attachment: @body_background_attachment; background-repeat: @body_background_repeat; background-position: @body_background_position; font-style: @default_forum_text_font_style; font-weight: @default_forum_text_font_weight; font-size: @default_forum_text_font_size; font-family: @default_forum_text_font_family; line-height: 1.4; text-decoration: @default_forum_text_decoration; text-transform: @default_forum_text_case; color: @default_forum_text_color; .flex-display(); .flex-direction(column); }
-
+body { background-color: @body_background_color; background-image: @body_background_image; background-repeat: @body_background_repeat; background-attachment: @body_background_attachment; background-position: @body_background_position; font-style: @default_forum_text_font_style; font-weight: @default_forum_text_font_weight; font-size: @default_forum_text_font_size; font-family: @default_forum_text_font_family; line-height: 1.4; text-decoration: @default_forum_text_decoration; text-transform: @default_forum_text_case; color: @default_forum_text_color; }
 
 /* Links
  * ====================================================== */
 
-a { font: @link_font; text-decoration: @link_decoration; color: @link_color; cursor: pointer; }
+a { font: @link_font; text-decoration: @link_decoration; color: @link_color; cursor: pointer; .transition(color 0.2s ease); }
 a:visited { text-decoration: @link_visited_decoration; color: @link_visited_color; }
 a:active { text-decoration: @link_active_decoration; color: @link_active_color; }
 a:hover,
 a:focus { text-decoration: @link_hover_decoration; color: @link_hover_color; }
 a.text { cursor: default; }
-
 
 /* Typography
  * ====================================================== */
@@ -384,7 +265,7 @@ h2 { font: @h2_font; text-decoration: @h2_decoration; text-transform: @h2_case; 
 h3 { font: @h3_font; text-decoration: @h3_decoration; text-transform: @h3_case; color: @h3_color; }
 
 abbr.time, .last-edited, #event_range .time { font: @timestamp_font; color: @timestamp_color; }
-abbr.time.recent_time { font-style: normal; font-weight: bold; }
+abbr.time.recent_time { font-style: normal; font-weight: @bold_weight; }
 
 blockquote { margin: 15px 40px; display: block; }
 
@@ -397,12 +278,11 @@ hr { height: 0; border: 0; border-top: 1px solid @container_inner_border_color; 
 .description { font: @description_font; color: @description_color; }
 .viewing { font: @viewing_font; color: @viewing_color; }
 .small { font: @small_desc_font; }
-.note { color: @small_desc_color; }
+.note { font-size: 1.2rem; color: @small_desc_color; }
 .placeholder,
 .placeholder-empty { color: #888; }
 .foot abbr.time,
 .small abbr.time { font-size: 100%; }
-
 
 /* ======================================================
  * Utilities
@@ -424,7 +304,7 @@ hr { height: 0; border: 0; border-top: 1px solid @container_inner_border_color; 
 .inline-block { display: inline-block; }
 .break-word { word-wrap: break-word; }
 .nowrap { white-space: nowrap; }
-.aria-hidden { width: 1px; height: 1px; margin: -1px; border: 0; padding: 0; word-wrap: normal !important; overflow: hidden; position: absolute !important; clip: rect(1px, 1px, 1px, 1px); clip-path: inset(50%); }
+.visually-hidden, .aria-hidden { width: 1px; height: 1px; margin: -1px; border: 0; padding: 0; word-wrap: normal !important; overflow: hidden; position: absolute !important; clip: rect(1px, 1px, 1px, 1px); clip-path: inset(50%); }
 .wysiwyg-textarea { width: 100%; height: 200px; }
 .post-options,
 .message-options { display: none; }
@@ -443,7 +323,6 @@ hr { height: 0; border: 0; border-top: 1px solid @container_inner_border_color; 
 .ui-helper-clearfix::after { content: '' !important; display: table !important; }
 .ui-helper-clearfix::after { clear: both !important; }
 
-
 /* CSS Arrows
  * ====================================================== */
 
@@ -458,7 +337,6 @@ hr { height: 0; border: 0; border-top: 1px solid @container_inner_border_color; 
 .arrow.big.right > span { margin-top: -5px; }
 .arrow.big.down > span { margin-left: -5px; }
 .arrow.big.left > span { margin-left: -8px; margin-top: -5px; }
-
 
 /* Padding Classes
  * ====================================================== */
@@ -500,7 +378,6 @@ hr { height: 0; border: 0; border-top: 1px solid @container_inner_border_color; 
 
 .pad-all-sides-thick { padding: 5px 20px !important; }
 
-
 /* Status Text
  * ====================================================== */
 
@@ -510,7 +387,7 @@ hr { height: 0; border: 0; border-top: 1px solid @container_inner_border_color; 
 .saved { color: @status_text_success_color; }
 .error { color: @status_text_failure_color; }
 
-.status-box { margin-left: 5px; padding: 1px 5px; font-weight: bold; }
+.status-box { margin-left: 5px; padding: 1px 5px; font-weight: @bold_weight; }
 .status-box.saved { background-color: @container_background_color_1; }
 .status-box.error { background-color: @container_background_color_1; }
 
@@ -518,20 +395,18 @@ hr { height: 0; border: 0; border-top: 1px solid @container_inner_border_color; 
 
 .posting-errors { padding: 5px; color: @status_text_failure_color; }
 
-.noscript-form-error { background: @container_background_color_1; margin: 0 0 10px 0; padding: 5px; font-weight: bold; color: @status_text_failure_color; }
+.noscript-form-error { background: @container_background_color_1; margin: 0 0 10px 0; padding: 5px; font-weight: @bold_weight; color: @status_text_failure_color; }
 
 .ui-form-error { background-color: @container_background_color_1; border: 2px solid @status_text_failure_color; padding: 4px; font-size: 1.1rem; color: @container_text_color_1; display: none; position: absolute; z-index: 9000; }
 input.ui-error { background-color: @container_background_color_1; padding: 2px; color: @status_text_failure_color; }
 
 .shoutbox_error { color: @status_text_failure_color; }
 
-
 /* ======================================================
  * Header
  * ====================================================== */
 
 header { margin-bottom: 10px; display: block; position: relative; }
-
 
 /* Banner
  * ====================================================== */
@@ -546,7 +421,6 @@ header { margin-bottom: 10px; display: block; position: relative; }
 
 a#logo { font: @banner_text_font; text-transform: @banner_text_case; text-decoration: @banner_text_decoration; color: @banner_text_color; white-space: normal; word-break: break-all; vertical-align: middle; }
 a#logo:hover { text-decoration: @banner_text_decoration !important; color: @banner_text_color !important; }
-
 
 /* ======================================================
  * Navigation Menu
@@ -587,7 +461,6 @@ a#logo:hover { text-decoration: @banner_text_decoration !important; color: @bann
 #navigation-menu div.tip-holder div.tip-number { background-color: @nav_bar_bubble_background; padding: 3px 6px; font: @nav_bar_bubble_font; line-height: 0.8em; color: @nav_bar_bubble_color; }
 #navigation-menu div.tip-holder span.tip { border-top: 4px solid @nav_bar_bubble_background; border-left: 4px solid transparent; border-right: 4px solid transparent; position: absolute; left: 6px; }
 
-
 /* Welcome Text
  * ====================================================== */
 
@@ -599,7 +472,6 @@ a#logo:hover { text-decoration: @banner_text_decoration !important; color: @bann
 
 #welcome { font: @welcome_text_font; line-height: 31px !important; text-align: right; color: @welcome_text_color; float: right; vertical-align: middle; }
 #welcome a { font: @welcome_links_font; text-decoration: @welcome_links_decoration; color: @welcome_links_color; }
-
 
 /* ======================================================
  * Navigation Tree
@@ -641,26 +513,12 @@ a#logo:hover { text-decoration: @banner_text_decoration !important; color: @bann
 #nav-tree li.new_span > a > .new-icon { float: none; display: inline-block; }
 #nav-tree li.state-selected > a { font-weight: bold !important; }
 
-.popup_html { position: absolute; top: 0; left: 0; z-index: 999999; }
-.popup_html ul { background-color: @nav_tree_background_color; border: @nav_tree_border_width @nav_tree_border_style @nav_tree_border_color; list-style-type: none; display: none; }
-.popup_html li a { margin: 0 1px 0 -2px; padding: 4px 10px 4px 15px; font: @nav_tree_font; text-decoration: @nav_tree_decoration; color: @nav_tree_color; display: block; }
-.popup_html .ui-menu { display: none; float: left; position: absolute; z-index: 11; }
-.popup_html .ui-menu a { max-width: 550px; overflow: hidden; }
-.popup_html .ui-menu li { padding: 2px 15px 2px 5px; white-space: nowrap; position: relative; }
-.popup_html .ui-menu li ul { display: none; position: absolute; z-index: 9999; }
-.popup_html .ui-menu li .arrow { width: 16px; height: 16px; margin-top: -8px; display: none; position: absolute; right: 2px; top: 50%; }
-.popup_html .ui-menu li.ui-menu-has-sub-menu > .arrow { display: block; }
-.popup_html .ui-menu li:hover { background-color: @nav_tree_hover_background_color; color: @nav_tree_hover_color; }
-.popup_html .ui-menu li:hover > a { font: @nav_tree_hover_font; text-decoration: @nav_tree_hover_decoration; color: @nav_tree_hover_color; }
-.popup_html .menu_arrow { width: 0; height: 0; border-width: 10px @nav_tree_border_width 10px 10px; border-style: @nav_tree_border_style none @nav_tree_border_style @nav_tree_border_style; border-color: transparent transparent transparent @nav_tree_border_color; position: absolute; top: 0; right: -10px; z-index: 1001; }
-.popup_html .menu_arrow span { width: 0; height: 0; border-width: 10px @nav_tree_border_width 10px 10px; border-style: @nav_tree_border_style none @nav_tree_border_style @nav_tree_border_style; border-color: transparent transparent transparent @nav_tree_background_color; position: absolute; top: -10px; left: -11px; z-index: 1002; }
-.popup_html li:hover { background-color: @nav_tree_hover_background_color; color: @nav_tree_hover_color; }
-.popup_html li:hover > div > a { font: @nav_tree_hover_font; text-decoration: @nav_tree_hover_decoration; color: @nav_tree_hover_color; }
-.popup_html li:hover .menu_arrow { border-color: transparent transparent transparent @nav_tree_border_color; }
-.popup_html li:hover .menu_arrow span { border-color: transparent transparent transparent @nav_tree_hover_background_color; }
-.popup_html li.new_span > a > .new-icon { display: inline-block; float: none; }
-.popup_html li.state-selected > a { font-weight: bold !important; }
+/**
+ * Hiding the dropdown links because they're dumb and
+ * don't add any value.
+ */
 
+.popup_html { display: none !important; }
 
 /* Participated Threads
  * ====================================================== */
@@ -669,7 +527,6 @@ a#logo:hover { text-decoration: @banner_text_decoration !important; color: @bann
 .recent-threads-button:hover { background-color: @nav_tree_hover_background_color; font: @nav_tree_hover_font; text-decoration: @nav_tree_hover_decoration; color: @nav_tree_hover_color; }
 .recent-threads-button .new-icon { margin: 0 5px 0 0; }
 .recent-threads-button.new .new-icon { margin-top: 2px; display: inline-block; }
-
 
 /* News Feed
  * ====================================================== */
@@ -689,13 +546,11 @@ a#logo:hover { text-decoration: @banner_text_decoration !important; color: @bann
 #news .nav:hover > span { border: @nav_tree_border_width @nav_tree_border_style @nav_tree_border_color; border-width: 0 @nav_tree_border_width 0 0; }
 #news .nav:hover .arrow { background-color: @nav_tree_hover_background_color; }
 
-
 /* ======================================================
  * Main
  * ====================================================== */
 
 #wrapper { width: @wrapper_width; margin: 0 auto; overflow-x: hidden; }
-
 
 /* Containers
  * ====================================================== */
@@ -707,21 +562,19 @@ a#logo:hover { text-decoration: @banner_text_decoration !important; color: @bann
 @content_area_border: 1px solid @container_inner_border_color;
 @content_area_text_font: @empty;
 @content_area_text_color: @container_text_color_1;
-@content_area_links_font: @content_area_text_font;
-@content_area_links_decoration: @empty;
 
 .container { margin-bottom: 0; color: @container_text_color_1; }
 .container + .container { margin-top: 10px; }
 
-.container a { font: @content_area_links_font; text-decoration: @content_area_links_decoration; color: @container_links_color; }
 .container abbr.time { color: @timestamp_color; }
 .container .note { color: lighten(@container_text_color_1, 15%); }
 
 .container > .content { background: @content_background; border-width: @content_border_width; border-style: @content_border_style; border-color: @container_outer_border_color; border-top-width: 0; padding: 0; color: @container_text_color_1; overflow: hidden; }
 
-.content-box { background: @content_area_background; border: @content_area_border; font: @content_area_text_font; color: @content_area_text_color; }
-.content-box a { font: @content_area_links_font; text-decoration: @content_area_links_decoration; color: @container_links_color; }
+.notice.container > .content,
+.error.container > .content { padding: 15px 20px !important; font-size: 1.4rem; line-height: 1.8; letter-spacing: 0.025em; }
 
+.content-box { background: @content_area_background; border: @content_area_border; font: @content_area_text_font; color: @content_area_text_color; }
 
 /* Title Bars
  * ====================================================== */
@@ -756,14 +609,11 @@ a#logo:hover { text-decoration: @banner_text_decoration !important; color: @bann
 .container > .title-bar h3 { font-weight: @title_text_font_weight; font-size: @title_text_font_size; font-family: @title_text_font_family; line-height: 30px !important; text-decoration: @title_text_decoration; text-transform: @title_text_transform; text-align: @title_text_align; color: @title_text_color; display: inline; }
 
 .container > .title-bar > .controls { float: right; }
-.container > .title-bar > .controls li a,
-.container > .title-bar > .controls li div { background-color: @title_buttons_background_color; background-image: @title_buttons_background_image; background-attachment: @title_buttons_background_attachment; background-repeat: @title_buttons_background_repeat; background-position: @title_buttons_background_position; height: 30px; border: @title_buttons_border; padding: 0 10px; font: @title_buttons_font; line-height: 30px !important; text-decoration: @title_buttons_decoration; color: @title_buttons_color; .box-sizing(content-box); }
-.container > .title-bar > .controls:hover li a,
-.container > .title-bar > .controls:hover li div { background: @title_buttons_hover_background; border: @title_buttons_hover_border; font: @title_buttons_hover_font; text-decoration: @title_buttons_hover_decoration !important; color: @title_buttons_hover_color !important; }
+.container > .title-bar > .controls li a { background-color: @title_buttons_background_color; background-image: @title_buttons_background_image; background-attachment: @title_buttons_background_attachment; background-repeat: @title_buttons_background_repeat; background-position: @title_buttons_background_position; height: 30px; border: @title_buttons_border; padding: 0 10px; font: @title_buttons_font; line-height: 30px !important; text-decoration: @title_buttons_decoration; color: @title_buttons_color; .box-sizing(content-box); }
+.container > .title-bar > .controls:hover li a { background: @title_buttons_hover_background; border: @title_buttons_hover_border; font: @title_buttons_hover_font; text-decoration: @title_buttons_hover_decoration !important; color: @title_buttons_hover_color !important; }
 
 .title_wrapper { overflow: hidden; }
 .title_wrapper img { display: block; }
-
 
 /* Control Bars
  * ====================================================== */
@@ -774,7 +624,7 @@ a#logo:hover { text-decoration: @banner_text_decoration !important; color: @bann
 .container > .control-bar { background: @action_bar_background; margin-bottom: 0; border: @action_bar_border; border-top-width: 0; border-bottom-width: 0; padding-left: 10px; padding-right: 10px; .box-sizing(content-box); }
 .container > .control-bar > .controls { padding: 7px 5px; color: #000; float: right; .box-sizing(); }
 .control-bar .control-icons { padding-top: 13px; display: block; }
-.control-bar .control-icons > span[class$="icon"] { margin-right: 7px; }
+.control-bar .control-icons > span[class*="icon"] { margin-right: 7px; }
 .control-bar .controls ul { z-index: 233; }
 .control-bar .controls .ui-selectMenu-box { margin-left: 10px; }
 .control-bar .ui-search { padding: 7px 0 7px 5px !important; .box-sizing(); }
@@ -791,7 +641,6 @@ a#logo:hover { text-decoration: @banner_text_decoration !important; color: @bann
 .ui-search .search-filters-button { width: auto; height: auto; min-height: 28px; border-width: 1px 1px 1px 0 !important; border-style: solid; border-color: darken(@container_inner_border_color, 20%); padding: 5px 8px 0 6px; cursor: pointer; display: inline-block; vertical-align: top; }
 .ui-search .search-filters-button .icon { width: auto; height: auto; display: inline-block; }
 .ui-search .search-filters-button.state-active { background: @title_buttons_color; }
-
 
 /* Dialogs
  * ====================================================== */
@@ -848,10 +697,22 @@ a#logo:hover { text-decoration: @banner_text_decoration !important; color: @bann
 
 /* --- Guests Online Dialog --- */
 
-#guests-online table { width: 150px; margin: auto; }
+#guests-online table { width: 100%; }
 #guests-online th,
-#guests-online td { padding: 2px 0; text-align: @members_align_name; }
+#guests-online td { padding: 2px 0; text-align: left; }
 
+/* --- Poll Dialog --- */
+
+#poll-dialog table { width: 100%; table-layout: auto; }
+#poll-dialog td { padding: 5px 10px 5px 0; line-height: 230%; vertical-align: top; }
+#poll-dialog td:first-child { width: 26%; }
+#poll-dialog .poll-options { line-height: 30px !important; }
+#poll-dialog .poll-options input[name="poll_max_answers"] { max-width: 35px; }
+
+/* -- Captcha Dialog --- */
+
+#captcha-container { background-color: @container_background_color_1; }
+#gre-captcha-container > div { margin: 0 auto; }
 
 /* ======================================================
  * Pagination
@@ -864,10 +725,8 @@ a#logo:hover { text-decoration: @banner_text_decoration !important; color: @bann
 .ui-pagination { overflow: hidden; display: inline-block; }
 .ui-pagination li { cursor: pointer; list-style: none; float: left; }
 .ui-pagination li + li { margin-left: 3px; }
-.ui-pagination li > a,
-.ui-pagination li > div { background-color: @pagination_background_color; border: 1px solid @container_inner_border_color; padding: 4px 5px; font-weight: bold; font-size: 1.3rem; text-decoration: none; color: @pagination_text_color; display: inline-block; }
-.ui-pagination li > a:hover,
-.ui-pagination li > div:hover { background-color: @pagination_hover_color; border-style: solid; border-color: @container_inner_border_color; text-decoration: none; color: @pagination_text_color; }
+.ui-pagination li > a { background-color: @pagination_background_color; border: 1px solid @container_inner_border_color; padding: 4px 5px; font-weight: bold; font-size: 1.3rem; text-decoration: none; color: @pagination_text_color; display: inline-block; }
+.ui-pagination li > a:hover { background-color: @pagination_hover_color; border-style: solid; border-color: @container_inner_border_color; text-decoration: none; color: @pagination_text_color; }
 .ui-pagination li.state-selected > a { background-color: @pagination_text_color; border: 0 solid transparent; padding: 5px 6px; cursor: default; color: @pagination_background_color; }
 .ui-pagination li.state-disabled > a { border-width: 1px; border-style: solid; padding: 4px 5px; cursor: default; opacity: 0.5; }
 .ui-pagination li.state-disabled > a:hover { background-color: @pagination_background_color; border-color: @pagination_background_color; }
@@ -880,7 +739,6 @@ a#logo:hover { text-decoration: @banner_text_decoration !important; color: @bann
 .ui-micro-pagination ul li + li { margin-left: 2px; }
 .ui-micro-pagination ul li > a { background-color: @pagination_micro_background_color; border: 1px solid mix(@pagination_text_color, @pagination_background_color, 40%); padding: 1px 3px; text-decoration: none; color: @pagination_micro_text_color; display: inline-block; }
 .ui-micro-pagination ul li > a:hover { background-color: @pagination_micro_hover_color; border: 1px solid mix(@pagination_text_color, @pagination_background_color, 70%); color: @pagination_micro_text_color; }
-
 
 /* ======================================================
  * Tabs
@@ -911,7 +769,6 @@ a#logo:hover { text-decoration: @banner_text_decoration !important; color: @bann
 .ui-tabMenu ul li:hover a { font: @tabs_hover_text_font; text-decoration: @tabs_hover_text_decoration; color: @tabs_hover_text_color; }
 .ui-tabMenu ul li.ui-active { background: @tabs_selected_background; border-bottom: @tabs_selected_border; }
 .ui-tabMenu ul li.ui-active a { border-bottom: 1px solid @tabs_selected_background; font: @tabs_selected_text_font; text-decoration: @tabs_selected_text_decoration; color: @tabs_selected_text_color; }
-
 
 /* ======================================================
  * Lists / Tables
@@ -973,7 +830,6 @@ table.list .last-edited { color: @timestamp_color; }
 
 .list .board.item:hover,
 #calendar-list .item:hover { background-color: @container_highlight_color; background-image: @lists_hover_background_image; background-attachment: @lists_hover_background_attachment; background-repeat: @lists_hover_background_repeat; background-position: @lists_hover_background_position; font: @lists_hover_text_font; color: @lists_hover_text_color; }
-
 
 /* ======================================================
  * Icons
@@ -1074,7 +930,6 @@ table.list .last-edited { color: @timestamp_color; }
 .new-icon:hover,
 .new-icon:hover a { font: @new_hover_link_font; text-decoration: @new_hover_link_decoration; text-transform: @new_hover_link_transform; color: @new_hover_link_color !important; }
 
-
 /* ======================================================
  * Footer
  * ====================================================== */
@@ -1100,24 +955,22 @@ table.list .last-edited { color: @timestamp_color; }
 .c-footer a { font: @footer_link_font; text-decoration: @footer_link_decoration; color: @footer_link_color; }
 .c-footer a:hover { font: @footer_link_hover_font; text-decoration: @footer_link_hover_decoration; color: @footer_link_hover_color; }
 
-.c-footer .c-footer__links { color: @footer_pipe_color; }
+.c-footer .c-footer__link-wrapper { color: @footer_pipe_color; }
 
 #js-switch-link { margin-top: 10px; }
-
 
 /* Ads
  * ====================================================== */
 
 .ad-banner--top { position: relative !important; }
-.ad-banner--top-50 { height: 90px !important; }
-.ad-banner--top-60 { height: 100px !important; }
-.ad-banner--top-90 { height: 130px !important; }
-.ad-banner--top-250 { height: 290px !important; }
-.ad-banner--top iframe { margin: 0 auto 40px !important; }
+.ad-banner--top-50 { height: 60px !important; }
+.ad-banner--top-60 { height: 70px !important; }
+.ad-banner--top-90 { height: 100px !important; }
+.ad-banner--top-250 { height: 260px !important; }
+.ad-banner--top iframe { margin: 0 auto 20px !important; }
 
-.ad-banner--bottom { margin: 60px auto 0 !important; }
+.ad-banner--bottom { margin: 40px auto 0 !important; }
 .ad-banner--bottom iframe { margin-bottom: 0 !important; }
-
 
 /* ======================================================
  * Pages
@@ -1126,32 +979,40 @@ table.list .last-edited { color: @timestamp_color; }
 /* Search Page
  * ====================================================== */
 
-.search .content { padding: 10px; }
-.search .row { .flex-display(); .flex-wrap(wrap); }
+.search .content { padding: 15px; }
+
+.search .row { display: flex; flex-wrap: wrap; }
+
 .search .header,
-.search .footer { font-size: 1.4rem; }
+.search .footer { padding: 15px 20px; font-size: 1.4rem; }
+.search .footer { display: flex; justify-content: space-between; align-items: center; }
+
 .search .header,
 .search .footer,
-.search .options-container { margin: 10px; padding: 10px; }
-.search .options-container { max-width: ~"calc(100% - 20px)"; overflow: hidden; .flex-shrink(0); .flex-basis(~"calc(100% - 20px)"); }
+.search .options-container { margin: 5px; letter-spacing: 0.015em; }
+
+.search .options-container { max-width: ~"calc(100% - 10px)"; overflow: hidden; flex-shrink: 0; flex-basis: ~"calc(100% - 10px)"; }
+.search .options-container:not(#how) { max-width: ~"calc(50% - 10px)"; padding: 15px 20px; flex-basis: ~"calc(50% - 10px)"; }
+.search .options-container table { width: 100%; table-layout: auto; }
 .search .options-container th { padding-bottom: 5px; font-size: 1.4rem; text-align: left; }
-.search .options-container td { padding: 5px 10px 5px 0; }
-.search .footer { .flex-display(); .align-items(center); .justify-content(space-between); }
+.search .options-container td { padding: 5px 0; font-size: 1.2rem; text-align: right; }
+.search .options-container td.option { width: 48%; padding-right: 15px; }
+.search #when.options-container td.input { text-align: left; }
+
+.search .input__space { padding-left: 8px; padding-right: 8px; }
+
 .search .disabled { background-color: #ddd; cursor: not-allowed; }
-.search #how { margin-bottom: 20px; font-size: 1.4rem; }
+
+.search #how { margin-bottom: 10px; padding: 15px 20px; font-size: 1.4rem; }
 .search #what input,
 .search #where input,
 .search #who input,
-.search #who select { width: 100%; max-width: 230px; }
+.search #who select { width: 100%; }
 .search #when input { max-width: 80px; }
+
 .search input[id*="-placeholder"] { cursor: pointer; }
 
 #where-board-subboard, #where-without, #where-category, #who-member-group { display: none; }
-
-@media only screen and (min-width: @screen_lg) {
-  .search .options-container:not(#how) { max-width: ~"calc(50% - 20px)"; .flex-basis(~"calc(50% - 20px)"); }
-}
-
 
 /* Members Page
  * ====================================================== */
@@ -1186,7 +1047,6 @@ table.list .last-edited { color: @timestamp_color; }
 
 .member { cursor: pointer; }
 
-
 /* Login/Registration Page
  * ====================================================== */
 
@@ -1200,12 +1060,10 @@ table.list .last-edited { color: @timestamp_color; }
 
 #forum-message-container { background: @container_background_color_2; margin: 10px; padding: 10px; color: @container_text_color_2; }
 
-
 /* Custom Pages
  * ====================================================== */
 
 .pbcpe-widget-title { color: @default_forum_text_color; }
-
 
 /* ======================================================
  * Board List
@@ -1240,14 +1098,15 @@ table.list .last-edited { color: @timestamp_color; }
 .board.item:hover { background-color: @container_highlight_color; background-image: @lists_hover_background_image; background-attachment: @lists_hover_background_attachment; background-repeat: @lists_hover_background_repeat; background-position: @lists_hover_background_position; font: @lists_hover_text_font; color: @lists_hover_text_color; }
 .board.item:hover .link a { font: @lists_hover_text_font; color: @lists_hover_text_color; }
 
-
 /* Password-protected Board
  * ====================================================== */
 
-#password-wrapper { margin: 10px 0; }
-#password-wrapper div { margin-right: 5px; display: inline-block; }
-#password-wrapper input { padding: 1px 6px 3px 6px; }
+.password__wrapper { display: flex; align-items: flex-end; }
 
+.password p { margin-bottom: 20px; font: @content_area_text_font; line-height: 1.8 !important; letter-spacing: 0.025em; color: @content_area_text_color; }
+.password label { font-weight: @bold_weight; font-size: 1rem; letter-spacing: 0.15em; text-transform: uppercase; color: @content_area_text_color; display: block; }
+.password input[type="password"] { margin-top: 5px; }
+.password input[type="submit"] { height: 32px; line-height: 30px !important; }
 
 /* ======================================================
  * Thread List
@@ -1275,7 +1134,6 @@ table.list .last-edited { color: @timestamp_color; }
 .threads .item.announcement.last > td { border-width: 0 1px 10px 0; border-style: solid; }
 .threads .item.announcement.last > td.checkbox,
 .threads .item.announcement.last > td.last { border-right: none; }
-
 
 /* ======================================================
  * Post List
@@ -1308,7 +1166,6 @@ table.list .last-edited { color: @timestamp_color; }
 @posts_signatures_text_color: @empty;
 
 .posts table { width: 100%; }
-.posts table.list > tbody > tr > td { border: @posts_separator_border; border-top-width: 0; border-right-width: 0; border-left-width: 0; }
 
 .posts .thread_description_page { border-bottom: @posts_separator_border; padding: 5px 10px; }
 .posts span.labels { border: @posts_separator_border; border-top-width: 0; border-right-width: 0; border-left-width: 0; padding: 0 6px 4px 6px; display: block; }
@@ -1361,7 +1218,6 @@ table.list .last-edited { color: @timestamp_color; }
 
 .quote_clear { clear: both; }
 
-
 /* Polls
  * ====================================================== */
 
@@ -1401,7 +1257,6 @@ table.list .last-edited { color: @timestamp_color; }
 .ui-poll .poll-vote-bar.rank-2 .rank, .ui-poll .poll-vote-bar.rank-2 .bar { background-color: @polls_rank_second_background_color; }
 .ui-poll .poll-vote-bar.rank-3 .rank, .ui-poll .poll-vote-bar.rank-3 .bar { background-color: @polls_rank_third_background_color; }
 
-
 /* Quotes
  * ====================================================== */
 
@@ -1419,7 +1274,6 @@ table.list .last-edited { color: @timestamp_color; }
 .quote div.quote_header { margin: 7px 0 16px 35px; display: block; }
 .quote.no_header { padding-top: 10px; }
 
-
 /* Quick Reply
  * ====================================================== */
 
@@ -1429,7 +1283,6 @@ table.list .last-edited { color: @timestamp_color; }
 .quick-reply .message { margin-bottom: 10px; }
 .quick-reply .guest_name { padding: 0 10px 10px 0; vertical-align: middle; }
 .quick-reply .guest_name label { font-weight: 800; display: inline; }
-
 
 /* ======================================================
  * Conversation List
@@ -1450,7 +1303,6 @@ table.list .last-edited { color: @timestamp_color; }
 .conversations .latest { width: 20%; text-align: @conversation_align_last_reply; border-right-width: 0; padding-right: 10px; cursor: pointer; }
 .conversations .item.new .new-icon { display: inline-block; }
 
-
 /* ======================================================
  * Message List
  * ====================================================== */
@@ -1470,7 +1322,6 @@ table.list .last-edited { color: @timestamp_color; }
 @messages_signatures_text_color: @empty;
 
 .messages table { width: 100%; }
-.messages table.list > tbody > tr > td { border: @messages_separator_border; border-top-width: 0; border-right-width: 0; border-left-width: 0; }
 
 .messages .conversation-labels { margin-right: 5px; margin-top: 5px; float: right; }
 .messages .participants { border-bottom: @messages_separator_border; padding: 5px 10px; }
@@ -1510,7 +1361,6 @@ table.list .last-edited { color: @timestamp_color; }
 .posting-options-list,
 .messaging-options-list { display: none; }
 
-
 /* ======================================================
  * Editor
  * ====================================================== */
@@ -1535,7 +1385,7 @@ table.list .last-edited { color: @timestamp_color; }
 .wysiwyg-area .poll th { padding-bottom: 5px; text-align: left; }
 .wysiwyg-area .poll [name="poll_max_answers"] { width: 25px; }
 .wysiwyg-area .poll .poll-options { line-height: 30px !important; }
-.wysiwyg-area .submit { line-height: 28px !important; .flex-display(); .flex-direction(row-reverse); .align-items(center); .justify-content(space-between); }
+.wysiwyg-area .submit { margin-top: 10px; padding: 20px; display: flex; flex-direction: row-reverse; justify-content: space-between; align-items: center; }
 .wysiwyg-area .edit_reason > label { width: 180px; line-height: 28px; float: left; }
 .wysiwyg-area .edit_reason > div { margin-left: 180px; }
 .wysiwyg-area .edit_reason > div > input { width: 100%; }
@@ -1576,7 +1426,6 @@ table.list .last-edited { color: @timestamp_color; }
 .grp_recipients_div li { background: @micro_background; width: 240px; margin: 3px; border: @micro_border; padding: 3px 22px 3px 5px; font: @micro_text_font; color: @micro_text_color; overflow: hidden; float: left; display: inline-block; position: relative; }
 .grp_recipients_div li a { font: @micro_link_font; text-decoration: @micro_link_decoration; color: @micro_link_color; }
 
-
 /* BBCode Editor
  * ====================================================== */
 
@@ -1585,7 +1434,6 @@ table.list .last-edited { color: @timestamp_color; }
 @bbcode_editor_text_color: @posts_odd_text_color;
 
 .ui-wysiwyg .editors .bbcode-editor textarea { background-color: @bbcode_editor_background_color; padding: 10px !important; font-family: @bbcode_editor_text_font_family; color: @bbcode_editor_text_color; }
-
 
 /* Preview Editor
  * ====================================================== */
@@ -1607,7 +1455,6 @@ table.list .last-edited { color: @timestamp_color; }
 @ve_posts_code_text_color: @posts_code_text_color;
 
 .editor.visual-editor { padding: 5px; }
-
 
 /* ======================================================
  * User Profile
@@ -1709,7 +1556,6 @@ table.list .last-edited { color: @timestamp_color; }
 .show-user .visit-badge-store .badge-store-text { height: 73px; padding-bottom: 10px; display: table-cell; vertical-align: bottom; }
 .show-user .visit-badge-store a.button { margin-left: 0; }
 
-
 /* Edit Profile
  * ====================================================== */
 
@@ -1750,7 +1596,7 @@ table.list .last-edited { color: @timestamp_color; }
 .edit-user .avatar.content-box { padding: 10px 10px 0 0; }
 .edit-user .micro-profile .avatar { padding: 0; }
 
-.edit-user #avatar-options { .flex-display(); }
+.edit-user #avatar-options { display: flex; }
 .edit-user #avatar-options .content-box { width: 172px; min-height: 270px; border-width: 1px; padding: 10px; text-align: center; position: relative; }
 .edit-user #avatar-options .content-box.options { width: 100%; min-width: 279px; max-width: 350px; text-align: left; }
 
@@ -1782,7 +1628,6 @@ table.list .last-edited { color: @timestamp_color; }
 #image-avatar-editor-container #link-image { height: 18px; }
 #image-avatar-editor-container #link-image.button { margin-left: 0; cursor: pointer; }
 
-
 /* Badges
  * ====================================================== */
 
@@ -1804,7 +1649,6 @@ table.list .last-edited { color: @timestamp_color; }
 .badge-thumbs { min-height: 36px; padding: 5px 130px 5px 5px !important; position: relative; }
 .badge-thumbs .badge-thumb { margin: 5px; }
 .badge-thumbs .button { margin-top: -13px; position: absolute; top: 50%; right: 10px; }
-
 
 /* ======================================================
  * Micro / Mini Profiles
@@ -1847,7 +1691,6 @@ table.list .last-edited { color: @timestamp_color; }
 .user-search-displaybox { min-width: 250px; z-index: 99999; }
 .user-search-displaybox .control-bar { border: none; }
 .user-search-displaybox .control-bar .ui-pagination { padding: 5px; display: inherit; }
-
 
 /* Mini Profiles
  * ====================================================== */
@@ -1962,7 +1805,6 @@ div.mini-profile a { font: @mini_links_font; text-decoration: @mini_links_decora
 .avatar_size_quote img,
 .avatar_size_quote default { max-width: 30px; max-height: 30px; }
 
-
 /* ======================================================
  * Buttons
  * ====================================================== */
@@ -2006,7 +1848,6 @@ input[type="submit"], input[type="button"], button { padding: 2px 6px; }
 
 .reply_button { float: right; }
 
-
 /* ======================================================
  * Form Elements
  * ====================================================== */
@@ -2039,7 +1880,6 @@ select { background-color: @forms_select_background; height: 28px; border: @form
 .setting-wrapper + .setting-wrapper { margin-top: 4px; }
 .setting-wrapper input { vertical-align: middle; }
 
-
 /* ======================================================
  * Labels
  * ====================================================== */
@@ -2058,7 +1898,6 @@ select { background-color: @forms_select_background; height: 28px; border: @form
 #manage-labels-container .style-wrapper .color_input { height: 28px; border: 1px solid #aaa; }
 #manage-labels-container .style-wrapper .color-picker { background: #eee; height: 28px; border: 1px solid #aaa; }
 #manage-labels-container .style-wrapper .color-picker-preview { height: 28px; border: 1px solid #aaa; border-right: none; }
-
 
 /* ======================================================
  * Info Center
@@ -2093,7 +1932,6 @@ select { background-color: @forms_select_background; height: 28px; border: @form
 .stats .content > table > tbody > tr > td:last-child { border-right-width: 0; }
 
 .stats .info { padding: 10px 20px; }
-
 
 /* ======================================================
  * Shoutbox

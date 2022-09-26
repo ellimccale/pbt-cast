@@ -1,0 +1,80 @@
+{if $[board.sub_board_list]}
+
+	<!-- Sub-Board Container -->
+	<div class="container boards">
+
+		<!-- Title Bar -->
+		<div class="title-bar">
+			<h2>Sub-Boards</h2>
+		</div>
+		<!-- / Title Bar -->
+
+		<!-- Sub-Board List -->
+		<div class="content">
+			$[board.sub_board_list]
+		</div>
+		<!-- / Sub-Board List -->
+
+	</div>
+	<!-- / Sub-Board Container -->
+
+{/if}
+
+{if $[display_thread_list]}
+
+	<!-- Thread Container -->
+	<div{if $[viewing_bookmarks]} id="bookmarks"{/if} class="container threads">
+
+		<!-- Title Bar -->
+		<div class="title-bar">
+			{if $[create_thread_button]}
+				<ul class="controls"><li>$[create_thread_button]</li></ul>
+			{/if}
+
+			<h2>$[board.display_name]</h2>
+		</div>
+		<!-- / Title Bar -->
+
+		<!-- Control Bar -->
+		<div class="control-bar ui-helper-clearfix $[scroll_class]">
+			$[search]
+
+			<!-- Hide selection/action menus from guests since they are not usable -->
+			{if !$[current_user.is_guest]}
+				<div class="controls">
+					$[selection_menu]
+					$[action_menu]
+				</div>
+			{/if}
+
+			$[pagination]
+		</div>
+		<!-- / Control Bar -->
+
+		<!-- Thread List -->
+		<div class="content">
+			<table class="list">
+				<thead>
+					<tr class="head">
+						<th class="icon">
+							<span class="visually-hidden">Status</span>
+						</th>
+						<th class="checkbox">&nbsp;</th>
+						<th class="main">Subject</th>
+						<th class="created-by">Created By</th>
+						<th class="replies">Replies</th>
+						<th class="views">Views</th>
+						<th class="latest last">Last Post</th>
+					</tr>
+				</thead>
+				<tbody class="$[list_class]">
+					$[thread_list]
+				</tbody>
+			</table>
+		</div>
+		<!-- / Thread List -->
+
+	</div>
+	<!-- / Thread Container -->
+
+{/if}

@@ -1,0 +1,49 @@
+{foreach $[message]}
+
+	<!-- Messages -->
+	<tr id="$[message.content_id]" class="$[message.content_class]">
+		<td>
+			<table>
+				<tr>
+					<td class="left-panel" rowspan="2">
+						$[message.created_by.miniprofile]
+					</td>
+					<td class="content">
+						<div class="content-head ui-helper-clearfix">
+							<div class="info">
+								<span class="date">$[message.created_on]</span>
+								{if $[message.how_posted]}
+									<span class="post-method">via $[message.how_posted]</span>
+								{/if}
+							</div>
+							<div class="controls">
+								$[message.quote_button]
+								$[message.select_options]
+							</div>
+						</div>
+						<div class="message">$[message.body]</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="foot">
+						{if $[message.created_by.signature]}
+							<div class="signature">$[message.created_by.signature]</div>
+						{/if}
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<!-- / Messages -->
+
+{/foreach}
+
+{if !$[message]}
+
+	<!-- No Messages -->
+	<tr class="last">
+		<td class="last center">No messages were found.</td>
+	</tr>
+	<!-- / No Messages -->
+
+{/if}

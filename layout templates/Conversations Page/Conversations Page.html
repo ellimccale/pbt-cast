@@ -1,0 +1,51 @@
+<!-- Conversation Container -->
+<div class="container conversations">
+
+	<!-- Title Bar -->
+	<div class="title-bar">
+		{if $[create_conversation_button]}
+			<ul class="controls"><li>$[create_conversation_button]</li></ul>
+		{/if}
+
+		<h2>$[folder_pretty]</h2>
+	</div>
+	<!-- / Title Bar -->
+
+	<!-- Control Bar -->
+	<div class="control-bar ui-helper-clearfix $[scroll_class]">
+		$[search]
+		<div class="controls">
+			$[folder_menu]
+			$[selection_menu]
+			$[action_menu]
+		</div>
+		$[pagination]
+	</div>
+	<!-- / Control Bar -->
+
+	<!-- Conversation List -->
+	<div class="content">
+		<table class="list">
+			<thead>
+				<tr class="head">
+					<th class="icon">&nbsp;</th>
+					<th class="checkbox">&nbsp;</th>
+					<th class="main">Subject</th>
+					{if $[outbox]}
+						<th class="recipients">Recipients</th>
+					{else}
+						<th class="created-by">Created By</th>
+					{/if}
+					<th class="replies">Replies</th>
+					<th class="latest">Last Reply</th>
+				</tr>
+			</thead>
+			<tbody class="$[list_class]">
+				$[conversation_list]
+			</tbody>
+		</table>
+	</div>
+	<!-- / Conversation List -->
+
+</div>
+<!-- / Conversation Container -->

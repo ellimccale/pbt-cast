@@ -1,0 +1,21 @@
+<!-- Following -->
+<div class="content-box">
+	<p class="center">
+		{if $[total_following]}
+			This member is following $[following_link]. Their activity is displayed below.
+		{else}
+			This member is not following any other members.
+		{/if}
+	</p>
+
+	<!-- Activity List -->
+	<table class="following list">
+		<tbody class="$[activity_list_class]">
+			$[activity_list]
+		</tbody>
+	</table>
+	$[more_button]
+	<!-- / Activity List -->
+
+</div>
+<!-- / Following -->

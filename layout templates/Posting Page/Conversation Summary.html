@@ -1,0 +1,28 @@
+{foreach $[message]}
+
+	<!-- Message Summary -->
+	<tr id="$[message.content_id]" class="$[message.content_class]">
+		<td class="content">
+			<div class="content-head">
+				<div class="info ui-helper-clearfix">
+					<div class="author float-left">Posted by $[message.created_by]</div>
+					<div class="float-right">$[message.created_on]</div>
+				</div>
+			</div>
+			<div class="message">
+				$[message.body]
+			</div>
+		</td>
+	</tr>
+	<!-- / Message Summary -->
+{/foreach}
+
+{if !$[message]}
+
+	<!-- No Messages -->
+	<tr class="last">
+		<td class="last center">No messages were found.</td>
+	</tr>
+	<!-- / No Messages -->
+
+{/if}

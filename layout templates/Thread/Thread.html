@@ -1,0 +1,49 @@
+<!-- Post Container -->
+<div class="container posts">
+
+	<!-- Title Bar -->
+	<div class="title-bar">
+		{if $[reply_button]}
+			<ul class="controls"><li>$[reply_button]</li></ul>
+		{/if}
+
+		<h2>$[thread.subject]</h2>
+	</div>
+	<!-- / Title Bar -->
+
+	<!-- Control Bar -->
+	<div class="control-bar ui-helper-clearfix $[scroll_class]">
+		$[search]
+		<div class="controls">
+			$[action_menu]
+		</div>
+		<div class="float-left">$[thread.icons]</div>
+		$[pagination]
+	</div>
+	<!-- / Control Bar -->
+
+	<!-- Post List -->
+	<div class="content">
+		$[thread.labels]
+		{if $[poll]}
+			<div class="ui-poll-container">
+				$[poll]
+			</div>
+		{/if}
+		<table class="list">
+			<tbody class="$[list_class]">
+				$[post_list]
+			</tbody>
+		</table>
+		{if !$[quick_reply]}
+			{if $[bottom_reply_button]}
+				<div class="reply_button pad-all-double">$[bottom_reply_button]<br class="clear"></div>
+			{/if}
+		{/if}
+	</div>
+	<!-- / Post List -->
+
+</div>
+<!-- / Post Container -->
+
+$[quick_reply]

@@ -1,0 +1,30 @@
+<!-- Quick Reply Container -->
+<div class="container quick-reply">
+
+	<!-- Title Bar -->
+	<div class="title-bar">
+		<ul class="controls"><li>$[reply_button]</li></ul>
+		<h2>Quick Reply</h2>
+	</div>
+	<!-- / Title Bar -->
+
+	<!-- Quick Reply -->
+	<div class="content">
+		$[form.header]
+		{if $[form.created_by_guest_name.input]}
+			<div class="guest_name">
+				<label>Guest Name:</label>
+				$[form.created_by_guest_name.input]
+			</div>
+		{/if}
+		<div class="message">
+			$[form.message.input]
+		</div>
+		$[captcha]
+		$[form.post.button]
+		$[form.footer]
+	</div>
+	<!-- / Quick Reply -->
+
+</div>
+<!-- / Quick Reply Container -->

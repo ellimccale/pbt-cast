@@ -1,0 +1,82 @@
+<table class="list" role="grid">
+	<tbody>
+		{foreach $[board]}
+			{if !$[board.is_redirect]}
+
+				<!-- Non-Redirect Boards -->
+				<tr id="$[board.content_id]" class="$[board.content_class]">
+					<td class="icon">$[board.icon]</td>
+					<td class="main clickable">
+						<p class="link">$[board] {if $[board.num_viewing]}<span class="viewing"> - $[board.num_viewing] Viewing</span>{/if}</p>
+						{if $[board.description]}
+							<p class="description">$[board.description]</p>
+						{/if}
+						{if $[board.num_mods]}
+							<p class="moderators">
+								Moderator{if $[board.num_mods] != 1}s{/if}:
+								{foreach $[board.moderator_group]}$[board.moderator_group.comma_before] $[board.moderator_group]{/foreach}{if $[board.moderator]}{if $[board.moderator_group]}, {/if}{/if}
+								{foreach $[board.moderator]}$[board.moderator]$[board.moderator.comma] {/foreach}
+							</p>
+						{/if}
+						{if $[board.sub_board]}
+							<p class="sub-boards">
+								Sub-board{if $[board.sub_board] != 1}s{/if}:
+								{foreach $[board.sub_board]}<a href="$[board.sub_board.href]">$[board.sub_board.name]</a>$[board.sub_board.comma] {/foreach}
+							</p>
+						{/if}
+					</td>
+					<td class="threads">
+						{if $[board.threads] == -1}
+							N/A
+						{else}
+							$[board.threads]<br>thread{if $[board.threads] != 1}s{/if}
+						{/if}
+					</td>
+					<td class="posts">
+						{if $[board.posts] == -1}
+							N/A
+						{else}
+							$[board.posts]<br>post{if $[board.posts] != 1}s{/if}
+						{/if}
+					</td>
+					<td class="latest last">
+						{if $[board.posts] > 0}
+							{if $[board.last_thread]}
+								$[board.last_thread.recent_link] by $[board.last_thread.last_post.created_by]<br>
+								<span class="date">$[board.last_thread.last_post.created_on]</span>
+							{/if}
+						{else}
+							No posts have been made on this board.
+						{/if}
+					</td>
+				</tr>
+				<!-- / Non-Redirect Boards -->
+
+			{else}
+
+				<!-- Redirect Boards -->
+				<tr id="$[board.content_id]" class="$[board.content_class]">
+					<td class="icon">$[board.icon]</td>
+					<td class="main clickable redirect last" colspan="4">
+						<p class="link">$[board]</p>
+						<p class="description">$[board.description]</p>
+					</td>
+				</tr>
+				<!-- / Redirect Boards -->
+
+			{/if}
+		{/foreach}
+
+		{if !$[board]}
+
+			<!-- No Boards -->
+			<tr class="last">
+				<td class="last center" colspan="5">
+						<p>No boards were found.</p>
+				</td>
+			</tr>
+			<!-- / No Boards -->
+
+		{/if}
+	</tbody>
+</table>

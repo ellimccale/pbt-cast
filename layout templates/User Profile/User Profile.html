@@ -1,0 +1,70 @@
+<!-- User Profile Container -->
+<div class="container show-user">
+
+	<!-- Title Bar -->
+	<div class="title-bar">
+		<h2>$[user.name] ($[user.username])</h2>
+	</div>
+	<!-- / Title Bar -->
+
+	<!-- User Profile -->
+	<div class="content">
+
+		<!-- User Profile Tabs -->
+		<div class="ui-tabMenu">
+			<ul class="ui-helper-clearfix">
+				{foreach $[menu]}<li{if $[menu.active]} class="ui-active"{/if}><a href="$[menu.href]">$[menu.text]</a></li>{/foreach}
+			</ul>
+		</div>
+		<!-- / User Profile Tabs -->
+
+		<!-- User Profile Header  -->
+		<div class="content pad-top-thick pad-sides-thick ui-helper-clearfix">
+			<div class="float-left ui-helper-clearfix">
+				<div class="float-left pad-right-thick">$[user.avatar_medium]</div>
+				<div class="float-right name_and_group">
+					<span class="big_username" style="color: $[user.color];">$[user.name]</span><br>
+					{if $[user.group]}
+						$[user.group.name]<br>$[user.group.stars]
+					{else}
+						$[user.rank.name]<br>$[user.rank.stars]
+					{/if}
+				</div>
+			</div>
+			<div class="float-right controls">
+				<!-- Do not show these buttons if the user is viewing their own profile -->
+				{if $[user.id] != $[current_user.id]}
+					<!-- Do not show options on admin account -->
+					{if $[user.id] != 1}
+						$[options]
+					{/if}
+					$[follow_button]
+					$[send_message_button]
+					$[invite_button]
+				{/if}
+				$[edit_profile_button]
+				<div class="float-right pad-top clear">
+					<p>
+						Username: <span class="note pad-right">$[user.username]</span>
+						{if $[user.is_online]}
+							<span class="bold">Member is Online</span>
+						{else}
+							Last Online: $[user.last_online]
+						{/if}
+					</p>
+				</div>
+			</div>
+		</div>
+		<!-- / User Profile Header -->
+
+		<!-- User Profile Content -->
+		<div class="pad-all-thick ui-helper-clearfix">
+			$[content]
+		</div>
+		<!-- / User Profile Content -->
+
+	</div>
+	<!-- / User Profile -->
+
+</div>
+<!-- / User Profile Container -->

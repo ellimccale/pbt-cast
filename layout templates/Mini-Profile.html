@@ -1,0 +1,40 @@
+<!-- Mini Profile -->
+<div class="$[miniprofile_class]">
+	$[user]<br>
+	{if $[user.is_guest]}Guest<br>{/if}
+	{if $[user.is_deleted]}<em>Deleted Member</em><br>{/if}
+	{if $[user.group]}
+		$[user.group.name]<br>
+		$[user.group.stars]<br>
+	{elseif $[user.rank]}
+		$[user.rank.name]<br>
+		{if $[user.rank.stars]}
+			$[user.rank.stars]<br>
+		{/if}
+	{/if}
+	{if $[user.custom_title]}$[user.custom_title]<br>{/if}
+	$[user.warning.bar]<br>
+	{if $[user.avatar]}
+		<div class="avatar">$[user.avatar]</div><br>
+	{/if}
+	{if $[user.personal_text.message]}
+		$[user.personal_text]<br>
+	{/if}
+	{if $[user.is_member]}
+		<div class="info ui-helper-clearfix">
+			Posts: $[user.posts]{if $[user.gender]}<span class="float-right">$[user.gender.image]</span>{/if}
+			{foreach $[user.mini_custom_field]}
+				<br><span class="$[user.mini_custom_field.content_class]">$[user.mini_custom_field.name]: $[user.mini_custom_field.value]</span>
+			{/foreach}
+			{if $[user.is_online]}<br><span class="italic">Member is Online</span>{/if}
+		</div><br>
+	{/if}
+	{if $[user.badges_miniprofile]}
+		<div class="$[user.badges_miniprofile_container_class]">
+			{foreach $[user.badges_miniprofile]}
+				$[user.badges_miniprofile.icon]
+			{/foreach}
+		</div>
+	{/if}
+</div>
+<!-- / Mini Profile -->
